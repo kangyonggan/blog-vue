@@ -2,7 +2,12 @@
   <div id="header">
     <div class="container">
       <ul>
-        <li class="icon" v-on:click="active('')"><a href="/#/"><img src="../assets/logo.png"/></a></li>
+        <li class="icon" v-on:click="active('')">
+          <a href="/#/">
+            <img src="/static/logo.png"/>
+            <span class="hidden">康永敢</span>
+          </a>
+        </li>
         <li v-for="category in categories"
             v-on:click="active(category.code)"
             :class="{'active': category.isActive}">
@@ -74,9 +79,12 @@
     padding: 0 10px;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 650px) {
     a {
       padding: 0 20px;
+    }
+    #header ul li a span {
+      display: block;
     }
   }
 
@@ -87,6 +95,13 @@
   img {
     height: 40px;
     margin-top: 10px;
+    float: left;
+  }
+
+  ul li a span {
+    float: left;
+    font-size: 20px;
+    margin-left: 5px;
   }
 
   .active {

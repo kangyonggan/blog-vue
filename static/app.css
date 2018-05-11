@@ -1,0 +1,42 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  background: #fafafa;
+  font-family: Monospaced Number, Chinese Quote, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.container {
+  clear: both;
+  max-width: 1056px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 16px auto 0 auto;
+}
+
+.main {
+}
+
+.border {
+  border: 1px solid #e8e8e8;
+  background: #fff;
+}
+
+.clear {
+  clear: both;
+}
+
+.hidden {
+  display: none;
+}
+
+.split {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.center {
+  text-align: center;
+}
+
+.push {
+  height: 50px;
+}
