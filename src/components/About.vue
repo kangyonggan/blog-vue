@@ -84,12 +84,13 @@
 
   ul {
     list-style: none;
-    padding-left: 10px;
+    padding: 0 10px;
   }
 
   li {
     line-height: 30px;
     color: #8c8c8c;
+    overflow: hidden;
   }
 
   .fa, .fab {

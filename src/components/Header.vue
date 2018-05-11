@@ -1,22 +1,20 @@
 <template>
   <div id="header">
-    <div class="container">
-      <ul>
-        <li class="icon" v-on:click="active('')">
-          <a href="/#/">
-            <img src="/static/logo.png"/>
-            <span class="hidden">康永敢</span>
-          </a>
-        </li>
-        <li v-for="category in categories"
-            v-on:click="active(category.code)"
-            :class="{'active': category.isActive}">
-          <a :href="'/#/' + category.code">
-            {{category.name}}
-          </a>
-        </li>
-      </ul>
-    </div>
+    <ul>
+      <li class="icon" v-on:click="active('')">
+        <a href="/#/">
+          <img src="/static/logo.png"/>
+          <span class="hidden">康永敢</span>
+        </a>
+      </li>
+      <li v-for="category in categories"
+          v-on:click="active(category.code)"
+          :class="{'active': category.isActive}">
+        <a :href="'/#/' + category.code">
+          {{category.name}}
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -27,12 +25,12 @@
     data() {
       return {
         categories: [
-          {name: '关于', isActive:  hash === "about", code: "about"},
-          {name: '留言', isActive:  hash === "guest", code: "guest"},
-          {name: '相册', isActive:  hash === "photo", code: "photo"},
-          {name: '小说', isActive:  hash === "novel", code: "novel"},
-          {name: '工具', isActive:  hash === "tool", code: "tool"},
-          {name: '文章', isActive:  hash === "article", code: "article"}
+          {name: '关于', isActive: hash === "about", code: "about"},
+          {name: '留言', isActive: hash === "guest", code: "guest"},
+          {name: '相册', isActive: hash === "photo", code: "photo"},
+          {name: '小说', isActive: hash === "novel", code: "novel"},
+          {name: '工具', isActive: hash === "tool", code: "tool"},
+          {name: '文章', isActive: hash === "article", code: "article"}
         ]
       };
     },
@@ -56,10 +54,12 @@
   }
 
   ul {
+    max-width: 1056px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 0 auto;
     list-style: none;
     position: absolute;
-    margin: 0;
-    padding: 0;
     left: 10px;
     right: 10px;
     height: 60px;
@@ -76,13 +76,14 @@
     color: #595959;
     text-decoration: none;
     line-height: 58px;
-    padding: 0 10px;
+    padding: 0 8px;
   }
 
   @media (min-width: 650px) {
     a {
       padding: 0 20px;
     }
+
     #header ul li a span {
       display: block;
     }
