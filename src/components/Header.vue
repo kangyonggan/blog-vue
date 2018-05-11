@@ -16,18 +16,19 @@
 </template>
 
 <script>
+  const hash = window.location.hash.substring(2);
   export default {
     name: 'Header',
     data() {
       return {
         categories: [
-          {name: '', isActive: false, code: "", icon: "logo.png"},
-          {name: '文章', isActive: false, code: "article", icon: ""},
-          {name: '工具', isActive: false, code: "tool", icon: ""},
-          {name: '小说', isActive: false, code: "novel", icon: ""},
-          {name: '相册', isActive: false, code: "photo", icon: ""},
-          {name: '留言', isActive: false, code: "guest", icon: ""},
-          {name: '关于', isActive: false, code: "about", icon: ""}
+          {name: '关于', isActive:  hash === "about", code: "about", icon: ""},
+          {name: '留言', isActive:  hash === "guest", code: "guest", icon: ""},
+          {name: '相册', isActive:  hash === "photo", code: "photo", icon: ""},
+          {name: '小说', isActive:  hash === "novel", code: "novel", icon: ""},
+          {name: '工具', isActive:  hash === "tool", code: "tool", icon: ""},
+          {name: '文章', isActive:  hash === "article", code: "article", icon: ""},
+          {name: '', isActive: false, code: "", icon: "logo.png"}
         ]
       };
     },
@@ -46,6 +47,7 @@
 <style scoped>
   #header {
     height: 60px;
+    background: #fff;
     border-bottom: 1px solid #e8e8e8;
   }
 
@@ -67,14 +69,14 @@
 
   a {
     font-size: 14px;
-    color: #444;
+    color: #595959;
     text-decoration: none;
     line-height: 58px;
     padding: 0 15px;
   }
 
   a:hover {
-    color: #777;
+    color: #8c8c8c;
   }
 
   img {
