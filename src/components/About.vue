@@ -16,20 +16,24 @@
           18521311137
         </li>
         <li>
-          <i class="fa fa-weixin" aria-hidden="true"></i>
-          18521311137
+          <i class="fa fa-home" aria-hidden="true"></i>
+          上海市嘉定区江桥镇
         </li>
         <li>
-          <i class="fa fa-qq" aria-hidden="true"></i>
+          <i class="fab fa-qq" aria-hidden="true"></i>
           2825176081
+        </li>
+        <li>
+          <i class="fab fa-weixin" aria-hidden="true"></i>
+          Brave_Kang
         </li>
         <li>
           <i class="fa fa-envelope" aria-hidden="true"></i>
           java@kangyonggan.com
         </li>
         <li>
-          <i class="fa fa-home" aria-hidden="true"></i>
-          上海市嘉定区江桥镇
+          <i class="fab fa-github" aria-hidden="true"></i>
+          https://github.com/kangyonggan
         </li>
       </ul>
 
@@ -89,7 +93,7 @@
     color: #8c8c8c;
   }
 
-  .fa {
+  .fa, .fab {
     width: 20px;
     text-align: right;
     margin-right: 10px;
