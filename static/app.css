@@ -10,10 +10,11 @@ html, body {
   max-width: 1056px;
   padding-left: 16px;
   padding-right: 16px;
-  margin: 16px auto 0 auto;
+  margin: 0 auto;
 }
 
-.main {
+.container > div {
+  margin-top: 16px;
 }
 
 .border {
@@ -35,8 +36,4 @@ html, body {
 
 .center {
   text-align: center;
-}
-
-.push {
-  height: 50px;
 }
