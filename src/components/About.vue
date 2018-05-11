@@ -74,7 +74,6 @@
 
   .right {
     padding: 10px;
-    height: 1000px;
   }
 
   .right p {
