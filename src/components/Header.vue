@@ -2,11 +2,11 @@
   <div id="header">
     <div class="container">
       <ul>
+        <li class="icon" v-on:click="active('')"><a href="/#/"><img src="../assets/logo.png"/></a></li>
         <li v-for="category in categories"
             v-on:click="active(category.code)"
-            :class="{'active': category.isActive, icon: category.icon != ''}">
+            :class="{'active': category.isActive}">
           <a :href="'/#/' + category.code">
-            <img v-if="category.icon != ''" :src="'/static/' + category.icon"/>
             {{category.name}}
           </a>
         </li>
@@ -22,13 +22,12 @@
     data() {
       return {
         categories: [
-          {name: '关于', isActive:  hash === "about", code: "about", icon: ""},
-          {name: '留言', isActive:  hash === "guest", code: "guest", icon: ""},
-          {name: '相册', isActive:  hash === "photo", code: "photo", icon: ""},
-          {name: '小说', isActive:  hash === "novel", code: "novel", icon: ""},
-          {name: '工具', isActive:  hash === "tool", code: "tool", icon: ""},
-          {name: '文章', isActive:  hash === "article", code: "article", icon: ""},
-          {name: '', isActive: false, code: "", icon: "logo.png"}
+          {name: '关于', isActive:  hash === "about", code: "about"},
+          {name: '留言', isActive:  hash === "guest", code: "guest"},
+          {name: '相册', isActive:  hash === "photo", code: "photo"},
+          {name: '小说', isActive:  hash === "novel", code: "novel"},
+          {name: '工具', isActive:  hash === "tool", code: "tool"},
+          {name: '文章', isActive:  hash === "article", code: "article"}
         ]
       };
     },
@@ -36,7 +35,7 @@
       active: function (code) {
         for (const index in this.categories) {
           const category = this.categories[index];
-          category.isActive = category.code === code && category.icon === '';
+          category.isActive = category.code === code;
         }
       }
     }
@@ -72,7 +71,13 @@
     color: #595959;
     text-decoration: none;
     line-height: 58px;
-    padding: 0 15px;
+    padding: 0 10px;
+  }
+
+  @media (min-width: 600px) {
+    a {
+      padding: 0 20px;
+    }
   }
 
   a:hover {
