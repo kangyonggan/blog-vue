@@ -27,6 +27,7 @@
   }
 
   .container {
+    position: relative;
     max-width: 1056px;
     padding-left: 16px;
     padding-right: 16px;

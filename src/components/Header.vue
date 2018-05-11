@@ -1,13 +1,15 @@
 <template>
   <div id="header">
     <div class="container">
-      <a href="/#/" id="title">
-        <img src="../assets/logo.png"/>
-        康永敢的博客
-      </a>
       <ul>
-        <li><a href="/#/guest">留言</a></li>
-        <li><a href="/#/about">关于</a></li>
+        <li v-for="category in categories"
+            v-on:click="active(category.code)"
+            :class="{'active': category.isActive, icon: category.icon != ''}">
+          <a :href="'/#/' + category.code">
+            <img v-if="category.icon != ''" :src="'/static/' + category.icon"/>
+            {{category.name}}
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -15,7 +17,28 @@
 
 <script>
   export default {
-    name: 'Header'
+    name: 'Header',
+    data() {
+      return {
+        categories: [
+          {name: '', isActive: false, code: "", icon: "logo.png"},
+          {name: '文章', isActive: false, code: "article", icon: ""},
+          {name: '工具', isActive: false, code: "tool", icon: ""},
+          {name: '小说', isActive: false, code: "novel", icon: ""},
+          {name: '相册', isActive: false, code: "photo", icon: ""},
+          {name: '留言', isActive: false, code: "guest", icon: ""},
+          {name: '关于', isActive: false, code: "about", icon: ""}
+        ]
+      };
+    },
+    methods: {
+      active: function (code) {
+        for (const index in this.categories) {
+          const category = this.categories[index];
+          category.isActive = category.code === code && category.icon === '';
+        }
+      }
+    }
   }
 </script>
 
@@ -28,40 +51,42 @@
 
   ul {
     list-style: none;
+    position: absolute;
     margin: 0;
-    float: right;
+    padding: 0;
+    left: 10px;
+    right: 10px;
+    height: 60px;
   }
 
   li {
     float: right;
-    border-top: 2px solid #fff;
-    margin-right: 16px;
-    padding: 0 15px;
-  }
-
-  img {
-    height: 30px;
-    margin-top: 15px;
-    float: left;
-    margin-right: 10px;
-  }
-
-  #title {
-    font-size: 20px;
+    border-bottom: 2px solid #fafafa;
+    text-align: center;
   }
 
   a {
     font-size: 14px;
     color: #444;
     text-decoration: none;
-    line-height: 62px;
+    line-height: 58px;
+    padding: 0 15px;
   }
 
   a:hover {
     color: #777;
   }
 
+  img {
+    height: 40px;
+    margin-top: 10px;
+  }
+
   .active {
-    border-top-color: #25b864;
+    border-bottom-color: #25b864;
+  }
+
+  .icon {
+    float: left;
   }
 </style>
