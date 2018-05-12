@@ -9,16 +9,13 @@
       <div class="split"></div>
 
       <ul class="list">
-        <li v-for="item in list" :class="{compact: compact}">
-          <div class="line" v-show="em"></div>
-          <a :href="'/#/' + item.id">{{item.title}}</a>
-          <em v-show="em">{{item.createdTime}}</em>
-        </li>
+        <slot v-bind:list="list"></slot>
       </ul>
 
       <ul class="pagination" v-show="pagination && page.pages > 1">
         <li class="show" v-show="page.hasPreviousPage"><a v-on:click="load(page.prePage)">&lt;</a></li>
-        <li v-for="nav in page.navigatepageNums" :class="{active: nav==page.pageNum, show: nav < page.pageNum + 2 && nav > page.pageNum - 2}">
+        <li v-for="nav in page.navigatepageNums"
+            :class="{active: nav==page.pageNum, show: nav < page.pageNum + 2 && nav > page.pageNum - 2}">
           <a v-on:click="nav!=page.pageNum && load(nav)">{{nav}}</a>
         </li>
         <li class="show" v-show="page.hasNextPage"><a v-on:click="load(page.nextPage)">&gt;</a></li>
@@ -32,7 +29,7 @@
 
   export default {
     name: 'List',
-    props: ["icon", "pagination", "compact", "em", "title", "url"],
+    props: ["icon", "pagination", "title", "url"],
     data() {
       return {
         list: [],
