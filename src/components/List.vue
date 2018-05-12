@@ -2,7 +2,7 @@
   <div>
     <div class="border">
       <p>
-        <i :class="iconClass"></i>
+        <i :class="icon"></i>
         {{title}}
       </p>
 
@@ -33,9 +33,23 @@
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
     name: 'List',
-    props: ["float", "iconClass", "pagination", "compact", "em", "title", "items"]
+    props: ["icon", "pagination", "compact", "em", "title", "url"],
+    data() {
+      return {
+        items: []
+      }
+    },
+    created: function () {
+      axios.get(this.url).then(res => {
+        if (res.status === 200) {
+          this.items = res.data;
+        }
+      }).catch(error => console.log(error));
+    }
   }
 </script>
 

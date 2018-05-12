@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="left">
-      <List iconClass="fa fa-list" :em="true" :pagination="true" title="文章列表" :items="articles"/>
+      <List icon="fa fa-list" :em="true" :pagination="true" title="文章列表" url="/static/data/articles.json"/>
     </div>
 
     <div class="right">
-      <List iconClass="fa fa-thumbs-up fa-fw" :compact="true" title="站长推荐" :items="articles"/>
-      <List iconClass="fa fa-edit" :compact="true" title="最近编辑" :items="articles"/>
-      <List iconClass="fa fa-bookmark" :em="true" :compact="true" title="收藏小说" :items="novels"/>
+      <List icon="fa fa-thumbs-up fa-fw" :compact="true" title="站长推荐" url="/static/data/articles.json"/>
+      <List icon="fa fa-edit" :compact="true" title="最近编辑" url="/static/data/articles.json"/>
+      <List icon="fa fa-bookmark" :em="true" :compact="true" title="收藏小说" url="/static/data/novels.json"/>
     </div>
   </div>
 </template>
