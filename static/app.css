@@ -112,6 +112,7 @@ a:hover {
   text-align: center;
   line-height: 33px;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .pagination li.active a {

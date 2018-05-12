@@ -9,24 +9,19 @@
       <div class="split"></div>
 
       <ul class="list">
-        <li v-for="item in items" :class="{compact: compact}">
+        <li v-for="item in list" :class="{compact: compact}">
           <div class="line" v-show="em"></div>
-          <a :href="'/#/' + item.href">{{item.title}}</a>
-          <em v-show="em">{{item.em}}</em>
+          <a :href="'/#/' + item.id">{{item.title}}</a>
+          <em v-show="em">{{item.createdTime}}</em>
         </li>
       </ul>
 
-      <ul class="pagination" v-show="pagination">
-        <li class="show"><a href="#">&lt;</a></li>
-        <li class="show"><a href="#">1</a></li>
-        <li class="active show"><a href="#">2</a></li>
-        <li class="show"><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">6</a></li>
-        <li><a href="#">7</a></li>
-        <li><a href="#">8</a></li>
-        <li class="show"><a href="#">&gt;</a></li>
+      <ul class="pagination" v-show="pagination && page.pages > 1">
+        <li class="show" v-show="page.hasPreviousPage"><a v-on:click="load(page.prePage)">&lt;</a></li>
+        <li v-for="nav in page.navigatepageNums" :class="{active: nav==page.pageNum, show: nav < page.pageNum + 2 && nav > page.pageNum - 2}">
+          <a v-on:click="nav!=page.pageNum && load(nav)">{{nav}}</a>
+        </li>
+        <li class="show" v-show="page.hasNextPage"><a v-on:click="load(page.nextPage)">&gt;</a></li>
       </ul>
     </div>
   </div>
@@ -40,15 +35,26 @@
     props: ["icon", "pagination", "compact", "em", "title", "url"],
     data() {
       return {
-        items: []
+        list: [],
+        page: {}
       }
     },
     created: function () {
-      axios.get(this.url).then(res => {
-        if (res.status === 200) {
-          this.items = res.data;
-        }
-      }).catch(error => console.log(error));
+      this.load(1);
+    },
+    methods: {
+      load: function (pageNum) {
+        axios.get(this.url + "?pageNum=" + pageNum).then(res => {
+          if (res.status === 200) {
+            if (this.pagination) {
+              this.page = res.data;
+              this.list = this.page.list;
+            } else {
+              this.list = res.data;
+            }
+          }
+        }).catch(error => console.log(error));
+      }
     }
   }
 </script>

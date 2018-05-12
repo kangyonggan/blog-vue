@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="left">
-      <List icon="fa fa-list" :em="true" :pagination="true" title="文章列表" url="/static/data/articles.json"/>
+      <List icon="fa fa-list" :em="true" :pagination="true" title="文章列表" url="http://localhost:8088/article/list"/>
     </div>
 
     <div class="right">
