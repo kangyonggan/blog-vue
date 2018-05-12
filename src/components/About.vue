@@ -33,7 +33,7 @@
         </li>
         <li>
           <i class="fab fa-github" aria-hidden="true"></i>
-          https://github.com/kangyonggan
+          <a href="https://github.com/kangyonggan" target="_blank">https://github.com/kangyonggan</a>
         </li>
       </ul>
 
@@ -79,7 +79,6 @@
   .right p {
     text-indent: 40px;
     line-height: 27px;
-    color: #595959;
   }
 
   ul {
@@ -97,6 +96,10 @@
     width: 20px;
     text-align: right;
     margin-right: 10px;
+  }
+
+  a {
+
   }
 
   @media (min-width: 650px) {

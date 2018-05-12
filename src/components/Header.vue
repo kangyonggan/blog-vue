@@ -14,6 +14,9 @@
           {{category.name}}
         </a>
       </li>
+      <form>
+        <input name="key" placeholder="搜索文章标题..."/>
+      </form>
     </ul>
   </div>
 </template>
@@ -29,8 +32,7 @@
           {name: '留言', isActive: hash === "guest", code: "guest"},
           {name: '相册', isActive: hash === "photo", code: "photo"},
           {name: '小说', isActive: hash === "novel", code: "novel"},
-          {name: '工具', isActive: hash === "tool", code: "tool"},
-          {name: '文章', isActive: hash === "article", code: "article"}
+          {name: '工具', isActive: hash === "tool", code: "tool"}
         ]
       };
     },
@@ -72,11 +74,29 @@
   }
 
   a {
-    font-size: 14px;
-    color: #595959;
-    text-decoration: none;
     line-height: 58px;
     padding: 0 8px;
+  }
+
+  form {
+    float: right;
+    margin-top: 15px;
+  }
+
+  input {
+    height: 30px;
+    line-height: 30px;
+    box-sizing: border-box;
+    padding: 0 15px 0 30px;
+    border: 1px solid #e3e3e3;
+    color: #2c3e50;
+    outline: none;
+    border-radius: 15px;
+    margin-right: 10px;
+    transition: border-color 0.2s ease;
+    background: #fff url(../assets/search.png) 8px 5px no-repeat;
+    background-size: 20px;
+    vertical-align: middle !important;
   }
 
   @media (min-width: 650px) {
@@ -89,8 +109,10 @@
     }
   }
 
-  a:hover {
-    color: #8c8c8c;
+  @media (max-width: 800px) {
+    input {
+      display: none;
+    }
   }
 
   img {

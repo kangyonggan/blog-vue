@@ -1,6 +1,7 @@
 html, body {
   padding: 0;
   margin: 0;
+  color: #595959;
   height: 100%;
   background: #fafafa;
   font-family: Monospaced Number, Chinese Quote, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -38,6 +39,7 @@ html, body {
 .border {
   border: 1px solid #e8e8e8;
   background: #fff;
+  border-radius: 5px;
 }
 
 .clear {
@@ -60,4 +62,58 @@ html, body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #595959;
+}
+
+a:hover {
+  color: #8c8c8c;
+}
+
+.more {
+  float: right;
+  margin-right: 10px;
+}
+
+.pagination {
+  list-style: none;
+  height: 32px;
+  padding-left: 15px;
+}
+
+.pagination li {
+  float: left;
+  display: none;
+}
+
+.pagination li.show {
+  display: block;
+}
+
+.pagination li a {
+  display: inline-block;
+  font-size: 14px;
+  color: #42b983;
+  border: 1px solid #e8e8e8;
+  margin-right: 10px;
+  width: 33px;
+  height: 33px;
+  text-align: center;
+  line-height: 33px;
+  border-radius: 3px;
+}
+
+.pagination li.active a {
+  border: none;
+  color: #595959;
+}
+
+@media (min-width: 650px) {
+  .pagination li {
+    display: block;
+  }
 }
