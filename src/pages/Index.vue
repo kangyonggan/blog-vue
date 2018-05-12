@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import List from './List'
+  import List from '../components/List'
 
   export default {
     components: {List},

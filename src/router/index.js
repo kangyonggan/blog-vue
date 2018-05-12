@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/components/Index'
-import About from '@/components/About'
-import Guest from '@/components/Guest'
-import NotFound from '@/components/NotFound'
+import Index from '@/pages/Index'
+import About from '@/pages/About'
+import Guest from '@/pages/Guest'
+import Novel from '@/pages/Novel'
+import Photo from '@/pages/Photo'
+import Tool from '@/pages/Tool'
+import NotFound from '@/pages/NotFound'
 
 Vue.use(Router);
 
@@ -26,6 +29,24 @@ const router = new Router({
       name: 'Guest',
       meta: {title: '留言'},
       component: Guest
+    },
+    {
+      path: '/tool',
+      name: 'Tool',
+      meta: {title: '工具'},
+      component: Tool
+    },
+    {
+      path: '/photo',
+      name: 'Photo',
+      meta: {title: '相册'},
+      component: Photo
+    },
+    {
+      path: '/novel',
+      name: 'Novel',
+      meta: {title: '小说'},
+      component: Novel
     },
     {
       path: '*',

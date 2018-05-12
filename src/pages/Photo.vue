@@ -1,12 +1,12 @@
 <template>
   <div>
-   这是留言板
+   开发中...
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Guest'
+    name: 'Photo'
   }
 </script>
 
