@@ -19,7 +19,7 @@
       }
     },
     created: function () {
-      axios.get("http://localhost:8088/article/detail?id=" + id).then(res => {
+      axios.get("/static/data/article.json?id=" + id).then(res => {
         if (res.status === 200) {
           this.article = res.data;
         }
