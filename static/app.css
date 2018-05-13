@@ -135,6 +135,10 @@ a:hover {
   font-size: 16px;
 }
 
+.markdown pre {
+  overflow: scroll;
+}
+
 .markdown img {
   max-width: 100%;
 }
