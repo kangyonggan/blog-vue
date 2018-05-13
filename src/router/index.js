@@ -6,6 +6,7 @@ import Guest from '@/pages/Guest'
 import Novel from '@/pages/Novel'
 import Photo from '@/pages/Photo'
 import Tool from '@/pages/Tool'
+import ArticleDetail from '@/pages/article/Detail'
 import NotFound from '@/pages/NotFound'
 
 Vue.use(Router);
@@ -47,6 +48,12 @@ const router = new Router({
       name: 'Novel',
       meta: {title: '小说'},
       component: Novel
+    },
+    {
+      path: '/article/*',
+      name: 'ArticleDetail',
+      meta: {title: '文章'},
+      component: ArticleDetail
     },
     {
       path: '*',

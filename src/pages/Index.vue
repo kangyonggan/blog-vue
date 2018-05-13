@@ -42,7 +42,7 @@
 
 <script>
   import List from '../components/List'
-  import {formatDate} from '@/common/date.js'
+  import {formatDate} from '@/common/js/date.js'
 
   export default {
     components: {List},
