@@ -66,12 +66,7 @@
       search: function (e) {
         if (e.keyCode === 13) {
           e.preventDefault();
-          const title = e.target.value;
-          if (title === '') {
-            return;
-          }
-
-          axios.get(process.env.API_ROOT + "/article/list?title=" + title).then(res => {
+          axios.get(process.env.API_ROOT + "/article/list?title=" + e.target.value).then(res => {
             if (res.status === 200) {
               console.log("search");
               this.$refs.articleList.reload(res.data);
