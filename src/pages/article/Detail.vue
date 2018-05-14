@@ -9,7 +9,7 @@
 
 <script>
   import axios from 'axios'
-  import Vue from 'Vue'
+  import Vue from 'vue'
   import $ from 'jquery'
   import {prettifyStyle} from '@/common/css/prettify.min.css'
   import {prettify} from '@/common/js/prettify.min.js'
