@@ -32,7 +32,7 @@
 
   export default {
     name: 'List',
-    props: ["icon", "pagination", "title", "url", "more"],
+    props: ["icon", "pagination", "pageSize", "title", "url", "more"],
     data() {
       return {
         list: [],
@@ -49,7 +49,11 @@
     methods: {
       loadFromUrl: function (url, pageNum) {
         this.serverUrl = url;
-        axios.get(process.env.API_ROOT + url + "?pageNum=" + pageNum).then(res => {
+        var params = "?pageNum=" + pageNum;
+        if (this.pageSize) {
+          params += "&pageSize=" + this.pageSize;
+        }
+        axios.get(process.env.API_ROOT + url + params).then(res => {
           if (res.status === 200) {
             if (this.pagination) {
               this.page = res.data;
