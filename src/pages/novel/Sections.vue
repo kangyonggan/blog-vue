@@ -4,7 +4,7 @@
       <template slot-scope="app">
         <li v-for="section in app.list" class="compact">
           <div class="line"></div>
-          <a :href="'/#/section/' + section.id">{{section.title}}</a>
+          <a :href="'/#/section/' + section.code">{{section.title}}</a>
           <em>{{section.createdTime | date}}</em>
         </li>
       </template>

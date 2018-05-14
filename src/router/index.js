@@ -8,6 +8,7 @@ import Photo from '@/pages/Photo'
 import Tool from '@/pages/Tool'
 import ArticleDetail from '@/pages/article/Detail'
 import NovelSections from '@/pages/novel/Sections'
+import Section from '@/pages/novel/Section'
 import NotFound from '@/pages/NotFound'
 
 Vue.use(Router);
@@ -59,6 +60,11 @@ const router = new Router({
       path: '/novel/*',
       name: 'NovelSections',
       component: NovelSections
+    },
+    {
+      path: '/section/*',
+      name: 'Section',
+      component: Section
     },
     {
       path: '*',
