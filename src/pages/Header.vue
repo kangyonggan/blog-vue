@@ -14,9 +14,6 @@
           {{category.name}}
         </a>
       </li>
-      <form>
-        <input name="key" placeholder="搜索文章标题..."/>
-      </form>
     </ul>
   </div>
 </template>
@@ -76,27 +73,6 @@
   a {
     line-height: 58px;
     padding: 0 8px;
-  }
-
-  form {
-    float: right;
-    margin-top: 15px;
-  }
-
-  input {
-    height: 30px;
-    line-height: 30px;
-    box-sizing: border-box;
-    padding: 0 15px 0 30px;
-    border: 1px solid #e3e3e3;
-    color: #2c3e50;
-    outline: none;
-    border-radius: 15px;
-    margin-right: 10px;
-    transition: border-color 0.2s ease;
-    background: #fff url(../assets/search.png) 8px 5px no-repeat;
-    background-size: 20px;
-    vertical-align: middle !important;
   }
 
   @media (min-width: 650px) {

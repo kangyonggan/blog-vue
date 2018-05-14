@@ -51,6 +51,10 @@
             }
           }
         }).catch(error => console.log(error));
+      },
+      reload: function (page) {
+        this.page = page;
+        this.list = page.list;
       }
     }
   }

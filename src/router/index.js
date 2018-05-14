@@ -67,7 +67,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // 更新title
   if (to.meta.title) {
-    document.title = to.meta.title + " · 康永敢"
+    document.title = to.meta.title
   }
   next();
 });
