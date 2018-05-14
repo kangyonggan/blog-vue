@@ -54,7 +54,6 @@
             if (this.pagination) {
               this.page = res.data;
               this.list = this.page.list;
-              console.log(this.page);
             } else {
               this.list = res.data;
             }
