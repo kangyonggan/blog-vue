@@ -31,7 +31,7 @@
           </li>
         </template>
       </List>
-      <List icon="fa fa-bookmark" title="收藏小说" url="/novel/favorite">
+      <List icon="fa fa-bookmark" title="收藏小说" url="/novel/favorite" more="novel">
         <template slot-scope="app">
           <li v-for="novel in app.list" class="compact">
             <div class="line"></div>

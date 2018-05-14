@@ -4,6 +4,9 @@
       <p>
         <i :class="icon"></i>
         {{title}}
+        <a v-show="more != undefined" :href="'/#/' + more">
+          <i class="fa fa-plus"></i>
+        </a>
       </p>
 
       <div class="split"></div>
@@ -29,7 +32,7 @@
 
   export default {
     name: 'List',
-    props: ["icon", "pagination", "title", "url"],
+    props: ["icon", "pagination", "title", "url", "more"],
     data() {
       return {
         list: [],
@@ -65,6 +68,11 @@
   p {
     margin-left: 15px;
     font-weight: bold;
+  }
+
+  p a {
+    float: right;
+    margin-right: 10px;
   }
 
   .list {
