@@ -41,7 +41,7 @@
     },
     methods: {
       load: function (pageNum) {
-        axios.get(this.url + "?pageNum=" + pageNum).then(res => {
+        axios.get(process.env.API_ROOT + this.url + "?pageNum=" + pageNum).then(res => {
           if (res.status === 200) {
             if (this.pagination) {
               this.page = res.data;

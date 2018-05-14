@@ -14,7 +14,6 @@
   import {prettifyStyle} from '@/common/css/prettify.min.css'
   import {prettify} from '@/common/js/prettify.min.js'
 
-  const id = window.location.hash.substring(10);
   export default {
     name: 'ArticleDetail',
     data() {
@@ -23,9 +22,11 @@
       }
     },
     created: function () {
-      axios.get("/static/data/article.json?id=" + id).then(res => {
+      const id = window.location.hash.substring(10);
+      axios.get(process.env.API_ROOT + "/article/detail?id=" + id).then(res => {
         if (res.status === 200) {
           this.article = res.data;
+          document.title = this.article.title;
           Vue.nextTick(function () {
             $(".markdown a").attr("target", "_blank");
             $(".markdown pre").addClass("prettyprint linenums");

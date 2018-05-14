@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="left">
-      <List icon="fa fa-list" :pagination="true" title="文章列表" url="/static/data/articles-page.json">
+      <List icon="fa fa-list" :pagination="true" title="文章列表" url="/article/list">
         <template slot-scope="app">
           <li v-for="article in app.list">
             <div class="line"></div>
@@ -13,21 +13,21 @@
     </div>
 
     <div class="right">
-      <List icon="fa fa-thumbs-up fa-fw" title="站长推荐" url="/static/data/articles.json">
+      <List icon="fa fa-thumbs-up fa-fw" title="站长推荐" url="/article/top">
         <template slot-scope="app">
           <li v-for="article in app.list" class="compact">
             <a :href="'/#/article/' + article.id">{{article.title}}</a>
           </li>
         </template>
       </List>
-      <List icon="fa fa-edit" title="最近编辑" url="/static/data/articles.json">
+      <List icon="fa fa-edit" title="最近编辑" url="/article/edit">
         <template slot-scope="app">
           <li v-for="article in app.list" class="compact">
             <a :href="'/#/article/' + article.id">{{article.title}}</a>
           </li>
         </template>
       </List>
-      <List icon="fa fa-bookmark" title="收藏小说" url="/static/data/novels.json">
+      <List icon="fa fa-bookmark" title="收藏小说" url="/novel/favorite">
         <template slot-scope="app">
           <li v-for="novel in app.list" class="compact">
             <div class="line"></div>
