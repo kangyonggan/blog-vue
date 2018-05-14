@@ -57,18 +57,12 @@
         return formatDate(new Date(date), 'yyyy-MM-dd');
       }
     },
-    data() {
-      return {
-        pageObj: {}
-      }
-    },
     methods: {
       search: function (e) {
         if (e.keyCode === 13) {
           e.preventDefault();
           axios.get(process.env.API_ROOT + "/article/list?title=" + e.target.value).then(res => {
             if (res.status === 200) {
-              console.log("search");
               this.$refs.articleList.reload(res.data);
             }
           }).catch(error => console.log(error));

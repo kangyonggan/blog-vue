@@ -7,6 +7,7 @@ import Novel from '@/pages/Novel'
 import Photo from '@/pages/Photo'
 import Tool from '@/pages/Tool'
 import ArticleDetail from '@/pages/article/Detail'
+import NovelSections from '@/pages/novel/Sections'
 import NotFound from '@/pages/NotFound'
 
 Vue.use(Router);
@@ -52,8 +53,12 @@ const router = new Router({
     {
       path: '/article/*',
       name: 'ArticleDetail',
-      meta: {title: '文章'},
       component: ArticleDetail
+    },
+    {
+      path: '/novel/*',
+      name: 'NovelSections',
+      component: NovelSections
     },
     {
       path: '*',

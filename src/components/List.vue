@@ -36,24 +36,33 @@
     data() {
       return {
         list: [],
-        page: {}
+        page: {},
+        serverUrl: ""
       }
     },
     created: function () {
-      this.load(1);
+      if (this.url) {
+        this.serverUrl = this.url;
+        this.load(1);
+      }
     },
     methods: {
-      load: function (pageNum) {
-        axios.get(process.env.API_ROOT + this.url + "?pageNum=" + pageNum).then(res => {
+      loadFromUrl: function (url, pageNum) {
+        this.serverUrl = url;
+        axios.get(process.env.API_ROOT + url + "?pageNum=" + pageNum).then(res => {
           if (res.status === 200) {
             if (this.pagination) {
               this.page = res.data;
               this.list = this.page.list;
+              console.log(this.page);
             } else {
               this.list = res.data;
             }
           }
         }).catch(error => console.log(error));
+      },
+      load: function (pageNum) {
+        this.loadFromUrl(this.serverUrl, pageNum);
       },
       reload: function (page) {
         this.page = page;
