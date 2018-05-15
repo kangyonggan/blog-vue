@@ -15,13 +15,13 @@
         <slot v-bind:list="list"></slot>
       </ul>
 
-      <ul class="pagination" v-show="pagination && page.pages > 1">
-        <li class="show" v-show="page.hasPreviousPage"><a v-on:click="load(page.prePage)">&lt;</a></li>
-        <li v-for="nav in page.navigatepageNums"
-            :class="{active: nav==page.pageNum, show: nav < page.pageNum + 2 && nav > page.pageNum - 2}">
-          <a v-on:click="nav!=page.pageNum && load(nav)">{{nav}}</a>
+      <ul class="pagination" v-show="pagination && pageInfo.pages > 1">
+        <li class="show" v-show="pageInfo.hasPreviousPage"><a v-on:click="jump(pageInfo.prePage)">&lt;</a></li>
+        <li v-for="nav in pageInfo.navigatepageNums"
+            :class="{active: nav==pageInfo.pageNum, show: nav < pageInfo.pageNum + 2 && nav > pageInfo.pageNum - 2}">
+          <a v-on:click="nav!=pageInfo.pageNum && jump(nav)">{{nav}}</a>
         </li>
-        <li class="show" v-show="page.hasNextPage"><a v-on:click="load(page.nextPage)">&gt;</a></li>
+        <li class="show" v-show="pageInfo.hasNextPage"><a v-on:click="jump(pageInfo.nextPage)">&gt;</a></li>
       </ul>
     </div>
   </div>
@@ -36,18 +36,18 @@
     data() {
       return {
         list: [],
-        page: {},
+        pageInfo: {},
         serverUrl: ""
       }
     },
     created: function () {
       if (this.url) {
         this.serverUrl = this.url;
-        this.load(1);
+        this.jump(1);
       }
     },
     methods: {
-      loadFromUrl: function (url, pageNum) {
+      load: function (url, pageNum) {
         this.serverUrl = url;
         var params = "?pageNum=" + pageNum;
         if (this.pageSize) {
@@ -55,21 +55,26 @@
         }
         axios.get(process.env.API_ROOT + url + params).then(res => {
           if (res.status === 200) {
-            if (this.pagination) {
-              this.page = res.data;
-              this.list = this.page.list;
+            if (res.data.respCo === '0000') {
+              if (this.pagination) {
+                this.pageInfo = res.data.pageInfo;
+              }
+              this.list = this.pageInfo.list;
+              scroll(0, 0);
             } else {
-              this.list = res.data;
+              console.error(res.data.respMsg);
             }
           }
         }).catch(error => console.log(error));
       },
-      load: function (pageNum) {
-        this.loadFromUrl(this.serverUrl, pageNum);
+      jump: function (pageNum) {
+        this.load(this.serverUrl, pageNum);
       },
-      reload: function (page) {
-        this.page = page;
-        this.list = page.list;
+      reload: function (pageInfo) {
+        if (this.pagination) {
+          this.pageInfo = pageInfo;
+        }
+        this.list = this.pageInfo.list;
       }
     }
   }

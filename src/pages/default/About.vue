@@ -2,7 +2,7 @@
   <div>
     <div class="left border">
       <div class="center">
-        <img src="../assets/me.jpg"/>
+        <img src="../../assets/me.jpg"/>
         <p>
           康永敢
         </p>

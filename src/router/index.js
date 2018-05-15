@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/pages/Index'
-import About from '@/pages/About'
-import Guest from '@/pages/Guest'
-import Novel from '@/pages/Novel'
-import Photo from '@/pages/Photo'
-import Tool from '@/pages/Tool'
+
+import NotFound from '@/pages/NotFound'
+import Index from '@/pages/default/Index'
+import About from '@/pages/default/About'
+import Guest from '@/pages/default/Guest'
+import Novel from '@/pages/default/Novel'
+import Photo from '@/pages/default/Photo'
+import Tool from '@/pages/default/Tool'
+
 import ArticleDetail from '@/pages/article/Detail'
 import NovelSections from '@/pages/novel/Sections'
 import Section from '@/pages/novel/Section'
-import NotFound from '@/pages/NotFound'
 
 Vue.use(Router);
 
