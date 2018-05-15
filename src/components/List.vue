@@ -12,7 +12,8 @@
       <div class="split"></div>
 
       <ul class="list">
-        <slot v-bind:list="list"></slot>
+        <slot v-bind:list="list" v-if="list && list.length > 0"></slot>
+        <li v-else class="empty">没有符合条件的记录</li>
       </ul>
 
       <ul class="pagination" v-show="pagination && pageInfo.pages > 1">
@@ -42,9 +43,11 @@
       }
     },
     created: function () {
-      this.serverUrl = this.url;
       this.listTitle = this.title;
-      this.jump(1);
+      if (this.url) {
+        this.serverUrl = this.url;
+        this.jump(1);
+      }
     },
     methods: {
       load: function (url, pageNum) {
@@ -61,13 +64,7 @@
         axios.get(url).then(res => {
           if (res.status === 200) {
             if (res.data.respCo === '0000') {
-              if (this.pagination) {
-                this.pageInfo = res.data.pageInfo;
-                this.list = this.pageInfo.list;
-              } else {
-                this.list = res.data.list;
-              }
-              scroll(0, 0);
+              this.reload(res);
             } else {
               console.error(res.data.respMsg);
             }
@@ -84,6 +81,8 @@
         } else {
           this.list = res.data.list;
         }
+
+        scroll(0, 0);
       },
       updateTitle: function (title) {
         this.listTitle = title;
@@ -161,6 +160,10 @@
     background: #fff;
     padding-left: 10px;
     font-size: 13px;
+  }
+
+  .empty {
+    text-align: center;
   }
 
   @media (max-width: 1000px) {
