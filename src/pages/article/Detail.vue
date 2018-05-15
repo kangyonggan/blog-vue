@@ -23,16 +23,20 @@
     },
     created: function () {
       const id = window.location.hash.substring(10);
-      axios.get(process.env.API_ROOT + "/article/detail?id=" + id).then(res => {
+      axios.get(process.env.API_ROOT + "article/" + id).then(res => {
         if (res.status === 200) {
-          this.article = res.data;
-          document.title = this.article.title;
-          Vue.nextTick(function () {
-            $(".markdown a").attr("target", "_blank");
-            $(".markdown pre").addClass("prettyprint linenums");
-            $(".markdown table").addClass("table table-striped table-bordered table-hover");
-            prettyPrint();
-          })
+          if (res.data.respCo === '0000') {
+            this.article = res.data.article;
+            document.title = this.article.title;
+            Vue.nextTick(function () {
+              $(".markdown a").attr("target", "_blank");
+              $(".markdown pre").addClass("prettyprint linenums");
+              $(".markdown table").addClass("table table-striped table-bordered table-hover");
+              prettyPrint();
+            })
+          } else {
+            console.error(res.data.respMsg);
+          }
         }
       }).catch(error => console.log(error));
     }
