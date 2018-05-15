@@ -26,6 +26,10 @@
       axios.get(process.env.API_ROOT + "article/" + id).then(res => {
         if (res.status === 200) {
           if (res.data.respCo === '0000') {
+            if (!res.data.article) {
+              res.data.article = {"title": "文章不存在", content:"<p style='text-align: center'>请联系管理员！</p>"};
+            }
+
             this.article = res.data.article;
             document.title = this.article.title;
             Vue.nextTick(function () {

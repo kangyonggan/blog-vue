@@ -1,6 +1,6 @@
 <template>
   <div>
-    <List icon="fa fa-list" ref="novelSections">
+    <List icon="fa fa-file-alt" ref="novelSections">
       <template slot-scope="app">
         <li v-for="section in app.list" class="compact">
           <a :href="'/#/section/' + section.code">{{section.title}}</a>
