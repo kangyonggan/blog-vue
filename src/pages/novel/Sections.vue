@@ -2,7 +2,7 @@
   <div>
     <List icon="fa fa-list" ref="novelSections">
       <template slot-scope="app">
-        <li v-for="section in app.list">
+        <li v-for="section in app.list" class="compact">
           <a :href="'/#/section/' + section.code">{{section.title}}</a>
         </li>
       </template>
@@ -53,4 +53,14 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  li {
+    display: inline-block;
+    width: 25%;
+  }
+
+  @media (max-width: 650px) {
+    li {
+      width: 100%;
+    }
+  }
 </style>
