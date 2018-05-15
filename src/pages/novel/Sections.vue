@@ -32,11 +32,15 @@
     },
     created: function () {
       const code = window.location.hash.substring(8);
-      axios.get(process.env.API_ROOT + "/novel/detail?code=" + code).then(res => {
+      axios.get(process.env.API_ROOT + "novel/" + code).then(res => {
         if (res.status === 200) {
-          this.title = res.data.name;
-          document.title = res.data.name;
-          this.$refs.novelSections.loadFromUrl("/novel/" + res.data.code + "/sections", 1);
+          if (res.data.respCo === '0000') {
+            this.title = res.data.novel.name;
+            document.title = res.data.name;
+            this.$refs.novelSections.load("novel/" + res.data.code + "/sections", 1);
+          } else {
+            console.error(res.data.respMsg);
+          }
         }
       }).catch(error => console.log(error));
     }

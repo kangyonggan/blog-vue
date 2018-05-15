@@ -4,7 +4,7 @@
       <input name="key" placeholder="搜索文章标题..." @keydown="search($event)"/>
     </form>
 
-    <List icon="fa fa-list" :pagination="true" pageSize="20" title="文章列表" url="article" ref="articleList">
+    <List icon="fa fa-list" :pagination="true" pageSize="7" title="文章列表" url="article" ref="articleList">
       <template slot-scope="app">
         <li v-for="article in app.list">
           <div class="line"></div>
@@ -37,7 +37,7 @@
 
             if (res.status === 200) {
               if (res.data.respCo === '0000') {
-                this.$refs.articleList.reload(res.data.pageInfo);
+                this.$refs.articleList.reload(res);
               } else {
                 console.error(res.data.respMsg);
               }
@@ -71,17 +71,5 @@
     background: #fff url(../../assets/search.png) 8px 5px no-repeat;
     background-size: 20px;
     vertical-align: middle !important;
-  }
-
-  @media (min-width: 650px) {
-    .left {
-      float: left;
-      width: 70%;
-    }
-
-    .right {
-      float: right;
-      width: 27%;
-    }
   }
 </style>

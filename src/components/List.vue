@@ -3,7 +3,7 @@
     <div class="border">
       <p>
         <i :class="icon"></i>
-        {{title}}
+        {{listTitle}}
         <a v-show="more != undefined" :href="'/#/' + more">
           <i class="fa fa-plus"></i>
         </a>
@@ -37,29 +37,36 @@
       return {
         list: [],
         pageInfo: {},
-        serverUrl: ""
+        serverUrl: "",
+        listTitle: ""
       }
     },
     created: function () {
-      if (this.url) {
-        this.serverUrl = this.url;
-        this.jump(1);
-      }
+      this.serverUrl = this.url;
+      this.listTitle = this.title;
+      this.jump(1);
     },
     methods: {
       load: function (url, pageNum) {
         this.serverUrl = url;
-        var params = "?pageNum=" + pageNum;
-        if (this.pageSize) {
-          params += "&pageSize=" + this.pageSize;
+        if (this.pagination) {
+          var params = "?pageNum=" + pageNum;
+          if (this.pageSize) {
+            params += "&pageSize=" + this.pageSize;
+          }
+          url = process.env.API_ROOT + url + params;
+        } else {
+          url = process.env.API_ROOT + url;
         }
-        axios.get(process.env.API_ROOT + url + params).then(res => {
+        axios.get(url).then(res => {
           if (res.status === 200) {
             if (res.data.respCo === '0000') {
               if (this.pagination) {
                 this.pageInfo = res.data.pageInfo;
+                this.list = this.pageInfo.list;
+              } else {
+                this.list = res.data.list;
               }
-              this.list = this.pageInfo.list;
               scroll(0, 0);
             } else {
               console.error(res.data.respMsg);
@@ -70,11 +77,16 @@
       jump: function (pageNum) {
         this.load(this.serverUrl, pageNum);
       },
-      reload: function (pageInfo) {
+      reload: function (res) {
         if (this.pagination) {
-          this.pageInfo = pageInfo;
+          this.pageInfo = res.data.pageInfo;
+          this.list = this.pageInfo.list;
+        } else {
+          this.list = res.data.list;
         }
-        this.list = this.pageInfo.list;
+      },
+      updateTitle: function (title) {
+        this.listTitle = title;
       }
     }
   }
