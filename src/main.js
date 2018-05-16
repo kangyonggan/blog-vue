@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import './components/toast/toast.css';
+import Toast from './components/toast/toast';
 
 Vue.config.productionTip = false
 
@@ -12,4 +14,6 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
-})
+});
+
+Vue.use(Toast);

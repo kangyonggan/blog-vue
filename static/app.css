@@ -101,6 +101,10 @@ a:hover {
   display: block;
 }
 
+.master {
+  color: #42b983;
+}
+
 .pagination li a {
   display: inline-block;
   font-size: 14px;
@@ -118,6 +122,14 @@ a:hover {
 .pagination li.active a {
   border: none;
   color: #595959;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
 }
 
 @media (min-width: 650px) {
