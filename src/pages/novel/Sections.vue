@@ -1,5 +1,10 @@
 <template>
   <div>
+    <a v-on:click="pull()" class="update">
+      <i class="fa fa-sync"></i>
+      更新
+    </a>
+
     <List icon="fa fa-file-alt" ref="novelSections">
       <template slot-scope="app">
         <li v-for="section in app.list" class="compact">
@@ -47,6 +52,17 @@
           }
         }
       }).catch(error => console.log(error));
+    },
+    methods: {
+      pull: function () {
+        const code = window.location.hash.substring(8);
+        console.log(code);
+        axios.get(process.env.API_ROOT + "novel/" + code + "/pull").then(res => {
+          if (res.status === 200) {
+            this.$toast.top('正在更新，请稍后刷新查看最新章节...');
+          }
+        }).catch(error => console.log(error));
+      }
     }
   }
 </script>
@@ -56,6 +72,13 @@
   li {
     display: inline-block;
     width: 25%;
+  }
+
+  .update {
+    float: right;
+    margin-top: 18px;
+    margin-right: 20px;
+    cursor: pointer;
   }
 
   @media (max-width: 650px) {
