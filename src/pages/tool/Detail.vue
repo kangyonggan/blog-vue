@@ -1,7 +1,7 @@
 <template>
   <div>
-    <form class="border">
-      <div v-show="tool.code == 'qr'">
+    <form class="border" enctype="multipart/form-data">
+      <div v-if="tool.code == 'qr'">
         <h3>生成二维码</h3>
         <div class="split"></div>
 
@@ -12,10 +12,13 @@
         </Select>
       </div>
 
-      <div v-show="tool.code == 'qr2'">
+      <div v-if="tool.code == 'qr2'">
         <h3>解析二维码</h3>
         <div class="split"></div>
-        开发中
+        <div class="form-group">
+          <label class="required">上传二维码：</label>
+          <input type="file" @change="change"/>
+        </div>
       </div>
       <div v-show="tool.code == 'bazi'">
         <h3>八字、五行</h3>
@@ -37,42 +40,42 @@
         <div class="split"></div>
         开发中
       </div>
-      <div v-show="tool.code == 'ascll'">
+      <div v-if="tool.code == 'ascll'">
         <h3>ASCLL码对照表</h3>
         <div class="split"></div>
         开发中
       </div>
-      <div v-show="tool.code == 'html'">
+      <div v-if="tool.code == 'html'">
         <h3>HTML转义字符</h3>
         <div class="split"></div>
         开发中
       </div>
-      <div v-show="tool.code == 'sql'">
+      <div v-if="tool.code == 'sql'">
         <h3>SQL格式化</h3>
         <div class="split"></div>
         开发中
       </div>
-      <div v-show="tool.code == 'json'">
+      <div v-if="tool.code == 'json'">
         <h3>JSON格式化</h3>
         <div class="split"></div>
         开发中
       </div>
-      <div v-show="tool.code == 'js'">
+      <div v-if="tool.code == 'js'">
         <h3>JS压缩</h3>
         <div class="split"></div>
         开发中
       </div>
-      <div v-show="tool.code == 'css'">
+      <div v-if="tool.code == 'css'">
         <h3>CSS压缩</h3>
         <div class="split"></div>
         开发中
       </div>
-      <div v-show="tool.code == 'charset'">
+      <div v-if="tool.code == 'charset'">
         <h3>编码转换</h3>
         <div class="split"></div>
         开发中
       </div>
-      <div v-show="tool.code == 'compare'">
+      <div v-if="tool.code == 'compare'">
         <h3>properties文件对比</h3>
         <div class="split"></div>
         开发中
@@ -94,8 +97,11 @@
       <div class="split"></div>
 
       <div class="result">
-        <div v-show="tool.code == 'qr'">
+        <div v-if="tool.code == 'qr'">
           <img :src="result == '' ? '/static/logo.png' : API_ROOT + result"/>
+        </div>
+        <div v-if="tool.code == 'qr2'">
+          {{result}}
         </div>
       </div>
     </div>
@@ -106,7 +112,6 @@
   import Input from '../../components/form/Input'
   import Select from '../../components/form/Select'
   import axios from 'axios'
-  import qs from 'qs'
 
   export default {
     components: {Input, Select},
@@ -118,7 +123,8 @@
         tool: {
           code: '',
           data: '',
-          size: ''
+          size: '',
+          file: null
         }
       }
     },
@@ -131,12 +137,33 @@
         e.target.parentNode.parentNode.reset();
         this.result = '';
       },
+      change: function (e) {
+        const file = e.target.files[0];
+        if (!file) {
+          return;
+        }
+        const imgSize = file.size / 1024;
+        if(imgSize > 1024){
+          this.$toast('请上传大小不要超过1M的图片');
+          e.target.parentNode.parentNode.parentNode.reset();
+          return;
+        }
+
+        this.tool.file = file;
+      },
       submit: function () {
-        console.log(this.tool);
         this.result = '';
-        axios.post(process.env.API_ROOT + "tool", qs.stringify(this.tool), {
+
+        var param = new FormData();
+        for (var key in this.tool) {
+          if (key) {
+            param.append(key, this.tool[key]);
+          }
+        }
+
+        axios.post(process.env.API_ROOT + "tool", param, {
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'multipart/form-data'
           }
         }).then(res => {
           if (res.status === 200) {
