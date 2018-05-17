@@ -8,9 +8,9 @@
         </a>
       </li>
       <li v-for="category in categories"
-          v-on:click="active(category.code)"
           :class="{'active': category.isActive}">
-        <a :href="'/#/' + category.code">
+        <a :href="'/#/' + category.code"
+           v-on:click="active(category.code)">
           {{category.name}}
         </a>
       </li>
