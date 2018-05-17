@@ -5,18 +5,13 @@
         <h3>生成二维码</h3>
         <div class="split"></div>
 
-        <div class="form-group">
-          <label class="required">输入URL或其他文本</label>
-          <input name="data" placeholder="如：https://kangyonggan.com" v-model="tool.data"/>
-        </div>
-        <div class="form-group">
-          <label class="required">选择二维码大小</label>
-          <select name="size" v-model="tool.size">
-            <option value=""></option>
-            <option v-for="size in 9" :value="size">{{size * 100}} * {{size * 100}}</option>
-          </select>
-        </div>
+        <Input name="data" label="输入URL或其他文本" :required="true" placeholder="如：https://kangyonggan.com" :model="tool"/>
+
+        <Select name="size" label="选择二维码大小" :required="true" placeholder="选择二维码大小" :model="tool">
+          <option v-for="size in 9" :value="size">{{size * 100}} * {{size * 100}}</option>
+        </Select>
       </div>
+
       <div v-show="tool.code == 'qr2'">
         <h3>解析二维码</h3>
         <div class="split"></div>
@@ -100,7 +95,7 @@
 
       <div class="result">
         <div v-show="tool.code == 'qr'">
-          <img :src="result == '' ? '/static/logo.png' : API_ROOT + result" />
+          <img :src="result == '' ? '/static/logo.png' : API_ROOT + result"/>
         </div>
       </div>
     </div>
@@ -108,10 +103,13 @@
 </template>
 
 <script>
+  import Input from '../../components/form/Input'
+  import Select from '../../components/form/Select'
   import axios from 'axios'
   import qs from 'qs'
 
   export default {
+    components: {Input, Select},
     name: 'ToolDetail',
     data() {
       return {
@@ -134,6 +132,7 @@
         this.result = '';
       },
       submit: function () {
+        console.log(this.tool);
         this.result = '';
         axios.post(process.env.API_ROOT + "tool", qs.stringify(this.tool), {
           headers: {
@@ -141,7 +140,7 @@
           }
         }).then(res => {
           if (res.status === 200) {
-            this.$toast.top(res.data.respMsg);
+            this.$toast(res.data.respMsg);
             if (res.data.respCo === '0000') {
               const code = this.tool.code;
               this.tool = {};
@@ -159,50 +158,6 @@
 <style scoped>
   form {
     padding: 15px 28px 15px 15px;
-  }
-
-  .form-group {
-    margin-top: 30px;
-  }
-
-  label {
-    display: inline-block;
-    width: 40%;
-    text-align: right;
-    margin-right: 10px;
-  }
-
-  .required:after {
-    color: red;
-    content: "*";
-  }
-
-  input, select {
-    margin-top: 5px;
-    width: 40%;
-    height: 34px;
-    line-height: 34px;
-    box-sizing: border-box;
-    padding: 0 8px;
-    border: 1px solid #e3e3e3;
-    color: #2c3e50;
-    outline: none;
-    border-radius: 3px;
-    transition: border-color 0.2s ease;
-    vertical-align: middle !important;
-  }
-
-  @media (max-width: 650px) {
-
-    label {
-      text-align: left;
-      width: 100%;
-      margin-right: 0;
-    }
-
-    input, select {
-      width: 100%;
-    }
   }
 
   p {

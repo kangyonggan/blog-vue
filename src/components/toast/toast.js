@@ -10,8 +10,8 @@ var showToast = false, // 存储toast显示状态
 Toast.install = function (Vue, options) {
   // 参数
   var opt = {
-    defaultType: 'bottom',
-    duration: '2500',
+    defaultType: 'top',
+    duration: '1500',
     wordWrap: false
   };
   for (var property in options) {
