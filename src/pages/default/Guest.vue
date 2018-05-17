@@ -4,9 +4,8 @@
       <textarea name="content" rows="6" placeholder="相遇便是缘分，留句话吧..." v-model="guest.content"></textarea>
       <input name="realname" placeholder="姓名" v-model="guest.realname"/>
       <input name="email" v-model="guest.email" placeholder="邮箱 (审核后会发邮件通知您)"/>
-      <a v-on:click="submit()">提交</a>
+      <a v-on:click="submit()" class="btn">提交</a>
     </form>
-
 
     <List icon="fa fa-comments" :pagination="true" pageSize="5" title="留言板" url="guest">
       <template slot-scope="app">
@@ -124,26 +123,6 @@
     border-radius: 3px;
     transition: border-color 0.2s ease;
     vertical-align: middle !important;
-  }
-
-  form a {
-    display: inline-block;
-    text-align: center;
-    line-height: 33px;
-    height: 33px;
-    width: 70px;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 3px;
-    color: #fff;
-    background-color: #25b864;
-    border-color: #25b864;
-  }
-
-  form a:hover {
-    color: #fff;
-    background-color: #14a753;
-    border-color: #14a753;
   }
 
   ul{

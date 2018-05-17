@@ -132,6 +132,18 @@ a:hover {
   float: right;
 }
 
+.empty-10 {
+  height: 10px;
+}
+
+.empty-20 {
+  height: 20px;
+}
+
+.empty-30 {
+  height: 30px;
+}
+
 @media (min-width: 650px) {
   .pagination li {
     display: block;
@@ -184,4 +196,38 @@ a:hover {
 
 .markdown img {
   max-width: 100%;
+}
+
+a.btn {
+  display: inline-block;
+  text-align: center;
+  line-height: 33px;
+  height: 33px;
+  width: 70px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #25b864;
+  border-color: #25b864;
+}
+
+a.btn-danger {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+a.btn:hover {
+  color: #fff;
+  background-color: #14a753;
+  border-color: #14a753;
+}
+
+a.btn-danger:hover {
+  background-color: #c8423e;
+  border-color: #c32e29;
+}
+
+.text-center {
+  text-align: center;
 }

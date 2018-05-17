@@ -6,10 +6,10 @@ import Index from '@/pages/default/Index'
 import About from '@/pages/default/About'
 import Guest from '@/pages/default/Guest'
 import Novel from '@/pages/default/Novel'
-import Photo from '@/pages/default/Photo'
 import Tool from '@/pages/default/Tool'
 
 import ArticleDetail from '@/pages/article/Detail'
+import ToolDetail from '@/pages/tool/Detail'
 import NovelSections from '@/pages/novel/Sections'
 import Section from '@/pages/novel/Section'
 
@@ -42,12 +42,6 @@ const router = new Router({
       component: Tool
     },
     {
-      path: '/photo',
-      name: 'Photo',
-      meta: {title: '相册'},
-      component: Photo
-    },
-    {
       path: '/novel',
       name: 'Novel',
       meta: {title: '小说'},
@@ -57,6 +51,11 @@ const router = new Router({
       path: '/article/*',
       name: 'ArticleDetail',
       component: ArticleDetail
+    },
+    {
+      path: '/tool/*',
+      name: 'ToolDetail',
+      component: ToolDetail
     },
     {
       path: '/novel/*',
