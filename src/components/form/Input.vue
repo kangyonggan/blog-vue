@@ -1,14 +1,38 @@
 <template>
   <div class="form-group">
     <label :class="{required: required}" :for="name">{{label}}</label>
-    <input :name="name" :id="name" :placeholder="placeholder" v-model="model[name]"/>
+    <input v-if="type!='file'" :type="type" :name="name" :id="name" :placeholder="placeholder" v-model="model[name]" />
+    <input v-if="type=='file'" v-show="false" :type="type" :name="name" :id="name" :placeholder="placeholder" @change="change"/>
+    <input v-if="type=='file'" v-show="true" readonly :id="name + '-input'" v-model="model[name + 'Value']" :placeholder="placeholder" @click="click"/>
   </div>
 </template>
 
 <script>
   export default {
     name: 'Input',
-    props: ["label", "name", "required", "placeholder", "model"]
+    props: ["label", "name", "required", "placeholder", "model", "type"],
+    methods: {
+      click: function () {
+        const input = document.getElementById(this.name);
+        input.click();
+      },
+      change: function (e) {
+        const file = e.target.files[0];
+        if (!file) {
+          this.$emit('change', this.name, null);
+          return;
+        }
+        const imgSize = file.size / 1024;
+        if(imgSize > 1024){
+          this.$toast('请上传大小不要超过1M的图片');
+          e.target.value = '';
+          this.$emit('change', this.name, null);
+          return;
+        }
+
+        this.$emit('change', this.name, file);
+      },
+    }
   }
 </script>
 
@@ -45,6 +69,10 @@
     border-radius: 3px;
     transition: border-color 0.2s ease;
     vertical-align: middle !important;
+  }
+
+  input[readonly] {
+    cursor: pointer;
   }
 
   @media (max-width: 650px) {

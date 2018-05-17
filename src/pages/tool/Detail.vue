@@ -15,10 +15,8 @@
       <div v-if="tool.code == 'qr2'">
         <h3>解析二维码</h3>
         <div class="split"></div>
-        <div class="form-group">
-          <label class="required">上传二维码：</label>
-          <input type="file" @change="change"/>
-        </div>
+
+        <Input name="file" type="file" v-on:change="change" label="上传二维码" :required="true" placeholder="选择含有二维码的图片" :model="tool"/>
       </div>
       <div v-show="tool.code == 'bazi'">
         <h3>八字、五行</h3>
@@ -124,7 +122,8 @@
           code: '',
           data: '',
           size: '',
-          file: null
+          file: null,
+          fileValue: ''
         }
       }
     },
@@ -134,22 +133,19 @@
     },
     methods: {
       reset: function (e) {
+        const code = this.tool.code;
+        this.tool = {};
+        this.tool.code = code;
         e.target.parentNode.parentNode.reset();
         this.result = '';
       },
-      change: function (e) {
-        const file = e.target.files[0];
-        if (!file) {
-          return;
+      change: function (name, file) {
+        this.tool[name] = file;
+        if (file) {
+          this.tool[name + 'Value'] = file.name;
+        } else {
+          this.tool[name + 'Value'] = '';
         }
-        const imgSize = file.size / 1024;
-        if(imgSize > 1024){
-          this.$toast('请上传大小不要超过1M的图片');
-          e.target.parentNode.parentNode.parentNode.reset();
-          return;
-        }
-
-        this.tool.file = file;
       },
       submit: function () {
         this.result = '';
