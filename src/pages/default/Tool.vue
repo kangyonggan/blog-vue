@@ -3,7 +3,7 @@
     <div class="item" v-for="tool in tools">
       <a :href="'/#/tool/' + tool.code">
         <img :src="'/static/tools/' + tool.code + '.png'"/>
-        <p>{{tool.name}}</p>
+        <p class="nowrap">{{tool.name}}</p>
       </a>
     </div>
     <div class="clear empty-20"></div>
@@ -56,7 +56,7 @@
           name: '编码转换'
         }, {
           code: 'compare',
-          name: 'properties文件对比'
+          name: 'props对比'
         }]
       }
     }
@@ -65,17 +65,22 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .tools-list > .item a {
-    display: inline-block;
-    padding: 20px 40px;
+  .tools-list > .item {
+    height: 240px;
+    width: 240px;
     text-align: center;
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
+  }
+  .tools-list > .item a {
+    margin-top: 28px;
+    display: inline-block;
+    text-align: center;
     color: #333;
     text-decoration: none;
-    float: left;
-    margin-left: 39px;
-    margin-top: 30px;
   }
 
   .tools-list > .item a img {
@@ -89,15 +94,19 @@
   }
 
   @media (max-width: 650px) {
+    .tools-list > .item {
+      width: 110px;
+      height: 100px;
+      margin-top: 10px;
+      margin-left: 10px;
+    }
     .tools-list > .item a {
-      padding: 15px 40px;
-      margin-left: 24px;
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
     .tools-list > .item a img {
-      width: 70px;
-      height: 70px;
+      width: 60px;
+      height: 60px;
     }
 
     .tools-list > .item a p {

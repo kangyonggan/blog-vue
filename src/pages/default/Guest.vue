@@ -137,11 +137,12 @@
   ul li {
     margin-top: 20px;
     padding-bottom: 15px;
-    min-height: 120px;
+    min-height: 80px;
     padding-right: 10px;
     padding-left: 10px;
     border-bottom: 1px dashed #e8e8e8;
     height: 100%;
+    line-height: normal !important;
   }
 
   ul li:last-child {
