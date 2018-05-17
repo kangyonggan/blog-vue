@@ -183,6 +183,7 @@
     font-size: 10px;
     color: #999;
     margin-top: 5px;
+    padding-left: 0;
   }
 
   ul li .r {
