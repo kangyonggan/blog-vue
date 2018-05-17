@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form class="border" enctype="multipart/form-data">
+    <form class="border">
       <div v-if="tool.code == 'qr'">
         <h3>生成二维码</h3>
         <div class="split"></div>
@@ -18,10 +18,19 @@
 
         <Input name="file" type="file" v-on:change="change" label="上传二维码" :required="true" placeholder="选择含有二维码的图片" :model="tool"/>
       </div>
+
       <div v-show="tool.code == 'bazi'">
         <h3>八字、五行</h3>
         <div class="split"></div>
-        开发中
+        <Select name="lunar" label="阴/阳历" :required="true" placeholder="选择阴/阳历" :model="tool">
+          <option value="0">阴历（小的那个）</option>
+          <option value="1">阳历（大的那个）</option>
+        </Select>
+
+        <Input type="number" name="year" label="出身年份（1900~2049）：" :required="true" placeholder="例如：1992" :model="tool"/>
+        <Input type="number" name="month" label="出生月份（1~12）：" :required="true" placeholder="例如：3" :model="tool"/>
+        <Input type="number" name="day" label="出生日期（1~31）：" :required="true" placeholder="例如：17" :model="tool"/>
+        <Input type="number" name="hour" label="出生时辰（0~23）：" :required="true" placeholder="例如：17" :model="tool"/>
       </div>
       <div v-show="tool.code == 'xml'">
         <h3>XML格式化</h3>
@@ -98,8 +107,7 @@
         <div v-if="tool.code == 'qr'">
           <img :src="result == '' ? '/static/logo.png' : API_ROOT + result"/>
         </div>
-        <div v-if="tool.code == 'qr2'">
-          {{result}}
+        <div v-else v-html="result">
         </div>
       </div>
     </div>
@@ -118,13 +126,7 @@
       return {
         API_ROOT: process.env.API_ROOT,
         result: '',
-        tool: {
-          code: '',
-          data: '',
-          size: '',
-          file: null,
-          fileValue: ''
-        }
+        tool: {}
       }
     },
     created: function () {
