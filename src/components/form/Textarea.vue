@@ -1,16 +1,13 @@
 <template>
   <div class="form-group">
     <label :class="{required: required}" :for="name">{{label}}</label>
-    <select :name="name" :id="name" :placeholder="placeholder" v-model="model[name]">
-      <option value=""></option>
-      <slot></slot>
-    </select>
+    <textarea :name="name" :id="name" rows="8" :placeholder="placeholder" v-model="model[name]"></textarea>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Select',
+    name: 'Textarea',
     props: ["label", "name", "required", "placeholder", "model"]
   }
 </script>
@@ -26,9 +23,9 @@
     height: 34px;
     line-height: 40px;
     display: inline-block;
-    width: 40%;
-    text-align: right;
+    width: 60%;
     margin-right: 10px;
+    margin-left: 20%;
   }
 
   .required:after {
@@ -36,29 +33,27 @@
     content: "*";
   }
 
-  select {
-    width: 40%;
-    height: 34px;
-    line-height: 34px;
-    box-sizing: border-box;
-    padding: 0 8px;
-    border: 1px solid #e3e3e3;
-    color: #2c3e50;
+  textarea {
+    margin-left: 20%;
+    width: 60%;
     outline: none;
+    border: 1px solid #e3e3e3;
+    padding: 5px;
+    font-size: 14px;
+    resize: none;
     border-radius: 3px;
-    transition: border-color 0.2s ease;
-    vertical-align: middle !important;
   }
 
   @media (max-width: 650px) {
     label {
-      text-align: left;
       width: 100%;
       margin-right: 0;
+      margin-left: 0;
     }
 
-    select {
-      width: 100%;
+    textarea {
+      width: 97%;
+      margin-left: 0;
     }
   }
 </style>

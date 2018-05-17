@@ -16,7 +16,8 @@
         <h3>解析二维码</h3>
         <div class="split"></div>
 
-        <Input name="file" type="file" v-on:change="change" label="上传二维码" :required="true" placeholder="选择含有二维码的图片" :model="tool"/>
+        <Input name="file" type="file" v-on:change="change" label="上传二维码" :required="true" placeholder="选择含有二维码的图片"
+               :model="tool"/>
       </div>
 
       <div v-show="tool.code == 'bazi'">
@@ -35,12 +36,12 @@
       <div v-show="tool.code == 'xml'">
         <h3>XML格式化</h3>
         <div class="split"></div>
-        开发中
+        <Textarea name="data" label="待格式化的XML：" :required="true" placeholder="请输入需要格式化的xml" :model="tool"/>
       </div>
       <div v-show="tool.code == 'idcard'">
         <h3>身份证查询</h3>
         <div class="split"></div>
-        开发中
+        <Input name="data" label="待查询的身份证：" :required="true" placeholder="请输入身份证号码" :model="tool"/>
       </div>
       <div v-show="tool.code == 'gencard'">
         <h3>生成身份证</h3>
@@ -107,6 +108,9 @@
         <div v-if="tool.code == 'qr'">
           <img :src="result == '' ? '/static/logo.png' : API_ROOT + result"/>
         </div>
+        <div v-else-if="tool.code == 'xml'">
+          <pre><code>{{result}}</code></pre>
+        </div>
         <div v-else v-html="result">
         </div>
       </div>
@@ -117,10 +121,11 @@
 <script>
   import Input from '../../components/form/Input'
   import Select from '../../components/form/Select'
+  import Textarea from '../../components/form/Textarea'
   import axios from 'axios'
 
   export default {
-    components: {Input, Select},
+    components: {Input, Select, Textarea},
     name: 'ToolDetail',
     data() {
       return {
