@@ -20,7 +20,7 @@
                :model="tool"/>
       </div>
 
-      <div v-show="tool.code == 'bazi'">
+      <div v-if="tool.code == 'bazi'">
         <h3>八字、五行</h3>
         <div class="split"></div>
         <Select name="lunar" label="阴/阳历" :required="true" placeholder="选择阴/阳历" :model="tool">
@@ -33,20 +33,34 @@
         <Input type="number" name="day" label="出生日期（1~31）：" :required="true" placeholder="例如：17" :model="tool"/>
         <Input type="number" name="hour" label="出生时辰（0~23）：" :required="true" placeholder="例如：17" :model="tool"/>
       </div>
-      <div v-show="tool.code == 'xml'">
+      <div v-if="tool.code == 'xml'">
         <h3>XML格式化</h3>
         <div class="split"></div>
         <Textarea name="data" label="待格式化的XML：" :required="true" placeholder="请输入需要格式化的xml" :model="tool"/>
       </div>
-      <div v-show="tool.code == 'idcard'">
+      <div v-if="tool.code == 'idcard'">
         <h3>身份证查询</h3>
         <div class="split"></div>
         <Input name="data" label="待查询的身份证：" :required="true" placeholder="请输入身份证号码" :model="tool"/>
       </div>
-      <div v-show="tool.code == 'gencard'">
+      <div v-if="tool.code == 'gencard'">
         <h3>生成身份证</h3>
         <div class="split"></div>
-        开发中
+        <Select name="prov" label="选择省份：" placeholder="随机"  :required="true" :model="tool">
+          <option v-for="(v, k) in serverData.cityCodes" :value="k">{{v}}</option>
+        </Select>
+        <Input type="number" name="startAge" label="起始年龄(周岁)：" :required="true" placeholder="默认：20" :model="tool"/>
+        <Input type="number" name="endAge" label="截止年龄(周岁)：" :required="true" placeholder="默认：60" :model="tool"/>
+
+        <Select name="sex" label="性别：" placeholder="随机" :required="true" :model="tool">
+          <option value="0">男</option>
+          <option value="1">女</option>
+        </Select>
+        <Select name="len" label="身份证位数：" placeholder="随机" :required="true" :model="tool">
+          <option value="15">15位</option>
+          <option value="18">18位</option>
+        </Select>
+        <Input type="number" name="count" label="生成数量（1~100）：" placeholder="默认：10" :required="true" :model="tool"/>
       </div>
       <div v-if="tool.code == 'ascll'">
         <h3>ASCLL码对照表</h3>
@@ -131,12 +145,22 @@
       return {
         API_ROOT: process.env.API_ROOT,
         result: '',
-        tool: {}
+        tool: {},
+        serverData: {}
       }
     },
     created: function () {
       const code = window.location.hash.substring(7);
       this.tool.code = code;
+      if (code === 'gencard') {
+        axios.get(process.env.API_ROOT + "tool?code=" + code).then(res => {
+          if (res.status === 200) {
+            if (res.data.respCo === '0000') {
+              this.serverData = res.data;
+            }
+          }
+        }).catch(error => console.log(error));
+      }
     },
     methods: {
       reset: function (e) {

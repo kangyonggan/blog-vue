@@ -2,7 +2,7 @@
   <div class="form-group">
     <label :class="{required: required}" :for="name">{{label}}</label>
     <select :name="name" :id="name" :placeholder="placeholder" v-model="model[name]">
-      <option value=""></option>
+      <option value="">{{placeholder}}</option>
       <slot></slot>
     </select>
   </div>
