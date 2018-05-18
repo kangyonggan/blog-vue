@@ -33,16 +33,19 @@
         <Input type="number" name="day" label="出生日期（1~31）：" :required="true" placeholder="例如：17" :model="tool"/>
         <Input type="number" name="hour" label="出生时辰（0~23）：" :required="true" placeholder="例如：17" :model="tool"/>
       </div>
+
       <div v-if="tool.code == 'xml'">
         <h3>XML格式化</h3>
         <div class="split"></div>
         <Textarea name="data" label="待格式化的XML：" :required="true" placeholder="请输入需要格式化的xml" :model="tool"/>
       </div>
+
       <div v-if="tool.code == 'idcard'">
         <h3>身份证查询</h3>
         <div class="split"></div>
         <Input name="data" label="待查询的身份证：" :required="true" placeholder="请输入身份证号码" :model="tool"/>
       </div>
+
       <div v-if="tool.code == 'gencard'">
         <h3>生成身份证</h3>
         <div class="split"></div>
@@ -62,46 +65,55 @@
         </Select>
         <Input type="number" name="count" label="生成数量（1~100）：" placeholder="默认：10" :required="true" :model="tool"/>
       </div>
-      <div v-if="tool.code == 'ascll'">
-        <h3>ASCLL码对照表</h3>
-        <div class="split"></div>
-        开发中
-      </div>
-      <div v-if="tool.code == 'html'">
-        <h3>HTML转义字符</h3>
-        <div class="split"></div>
-        开发中
-      </div>
+
       <div v-if="tool.code == 'sql'">
         <h3>SQL格式化</h3>
         <div class="split"></div>
-        开发中
+
+        <Select name="dialect" label="选择数据库方言" :required="true" placeholder="选择数据库方言" :model="tool">
+          <option value="MySQL">MySQL</option>
+          <option value="Oracle">Oracle</option>
+          <option value="SQLServer">SQLServer</option>
+        </Select>
+        <Textarea name="data" label="待格式化的SQL：" :required="true" placeholder="请输入需要格式化的SQL" :model="tool"/>
       </div>
+
       <div v-if="tool.code == 'json'">
         <h3>JSON格式化</h3>
         <div class="split"></div>
-        开发中
+        <Textarea name="data" label="待格式化的JSON：" :required="true" placeholder="请输入需要格式化的JSON" :model="tool"/>
       </div>
+
       <div v-if="tool.code == 'js'">
         <h3>JS压缩</h3>
         <div class="split"></div>
-        开发中
+        <Textarea name="data" label="待压缩的JS：" :required="true" placeholder="请输入需要压缩的JS" :model="tool"/>
       </div>
+
       <div v-if="tool.code == 'css'">
         <h3>CSS压缩</h3>
         <div class="split"></div>
-        开发中
+        <Textarea name="data" label="待压缩的CSS：" :required="true" placeholder="请输入需要压缩的CSS" :model="tool"/>
       </div>
+
       <div v-if="tool.code == 'charset'">
         <h3>编码转换</h3>
         <div class="split"></div>
-        开发中
+
+        <Select name="charset" label="选择转码方式" :required="true" placeholder="不选不转码" :model="tool">
+          <option value="1" >UTF-8 转 GBK</option>
+          <option value="2" >UTF-8 转 IOS-8859-1</option>
+          <option value="3" >GBK 转 UTF-8</option>
+          <option value="4" >GBK 转 IOS-8859-1</option>
+          <option value="5" >IOS-8859-1 转 UTF-8</option>
+          <option value="6" >IOS-8859-1 转 GBK</option>
+          <option value="7" >字符串 转 unicode</option>
+          <option value="8" >unicode 转 字符串</option>
+        </Select>
+
+        <Textarea name="data" label="待转码的字符串：" :required="true" placeholder="请输入需要转码的字符串" :model="tool"/>
       </div>
-      <div v-if="tool.code == 'compare'">
-        <h3>properties文件对比</h3>
-        <div class="split"></div>
-        开发中
-      </div>
+
       <div class="empty-20"></div>
       <div class="split"></div>
       <div class="text-center">
@@ -122,7 +134,7 @@
         <div v-if="tool.code == 'qr'">
           <img :src="result == '' ? '/static/logo.png' : API_ROOT + result"/>
         </div>
-        <div v-else-if="tool.code == 'xml'">
+        <div v-else-if="tool.code == 'xml' || tool.code == 'json' || tool.code == 'sql' || tool.code == 'js' || tool.code == 'css'">
           <pre><code>{{result}}</code></pre>
         </div>
         <div v-else v-html="result">
@@ -196,9 +208,6 @@
           if (res.status === 200) {
             this.$toast(res.data.respMsg);
             if (res.data.respCo === '0000') {
-              const code = this.tool.code;
-              this.tool = {};
-              this.tool.code = code;
               this.result = res.data.result;
             }
           }

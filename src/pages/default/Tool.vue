@@ -34,12 +34,6 @@
           code: 'gencard',
           name: '生成身份证'
         }, {
-          code: 'ascll',
-          name: 'ASCLL码对照表'
-        }, {
-          code: 'html',
-          name: 'HTML转义字符'
-        }, {
           code: 'sql',
           name: 'SQL格式化'
         }, {
@@ -54,9 +48,6 @@
         }, {
           code: 'charset',
           name: '编码转换'
-        }, {
-          code: 'compare',
-          name: 'props对比'
         }]
       }
     }
