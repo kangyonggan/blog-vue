@@ -9,7 +9,7 @@
         <li v-for="article in app.list">
           <div class="line"></div>
           <a :href="'/#/article/' + article.id">{{article.title}}</a>
-          <em>{{article.createdTime | date}}</em>
+          <em>{{article.createdTime}}</em>
         </li>
       </template>
     </List>
@@ -17,32 +17,16 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import List from '../../components/List'
-  import {formatDate} from '@/common/js/date.js'
-
   export default {
-    components: {List},
     name: 'Index',
-    filters: {
-      date: function (date) {
-        return formatDate(new Date(date), 'yyyy-MM-dd');
-      }
-    },
     methods: {
       search: function (e) {
         if (e.keyCode === 13) {
           e.preventDefault();
-          axios.get(process.env.API_ROOT + "article?title=" + e.target.value).then(res => {
-
-            if (res.status === 200) {
-              if (res.data.respCo === '0000') {
-                this.$refs.articleList.reload(res);
-              } else {
-                console.error(res.data.respMsg);
-              }
-            }
-          }).catch(error => console.log(error));
+          let that = this
+          this.httpGet("article?title=" + e.target.value, function (data) {
+            that.$refs.articleList.reload(data);
+          })
         }
       }
     }

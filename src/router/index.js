@@ -4,7 +4,6 @@ import Router from 'vue-router'
 import NotFound from '@/pages/NotFound'
 import Index from '@/pages/default/Index'
 import About from '@/pages/default/About'
-import Guest from '@/pages/default/Guest'
 import Novel from '@/pages/default/Novel'
 import Tool from '@/pages/default/Tool'
 
@@ -28,12 +27,6 @@ const router = new Router({
       name: 'About',
       meta: {title: '关于我'},
       component: About
-    },
-    {
-      path: '/guest',
-      name: 'Guest',
-      meta: {title: '留言'},
-      component: Guest
     },
     {
       path: '/tool',

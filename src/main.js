@@ -4,7 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './components/toast/toast.css';
+import './common'
 import Toast from './components/toast/toast';
+import List from './components/List.vue'
+
+Vue.component('List', List)
 
 Vue.config.productionTip = false
 

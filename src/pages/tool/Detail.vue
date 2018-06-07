@@ -165,13 +165,10 @@
       const code = window.location.hash.substring(7);
       this.tool.code = code;
       if (code === 'gencard') {
-        axios.get(process.env.API_ROOT + "tool?code=" + code).then(res => {
-          if (res.status === 200) {
-            if (res.data.respCo === '0000') {
-              this.serverData = res.data;
-            }
-          }
-        }).catch(error => console.log(error));
+        let that = this
+        this.httpGet("tool?code=" + code, function (data) {
+          that.serverData = data;
+        });
       }
     },
     methods: {
@@ -200,18 +197,10 @@
           }
         }
 
-        axios.post(process.env.API_ROOT + "tool", param, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then(res => {
-          if (res.status === 200) {
-            this.$toast(res.data.respMsg);
-            if (res.data.respCo === '0000') {
-              this.result = res.data.result;
-            }
-          }
-        }).catch(error => console.log(error));
+        let that = this
+        this.httpPost('tool', param, function (data) {
+          that.result = data.result;
+        })
       }
     }
   }

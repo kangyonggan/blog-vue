@@ -19,54 +19,95 @@
 </template>
 
 <script>
-  import axios from 'axios'
-
   export default {
     name: 'Section',
     data() {
       return {
-        section: {}
+        loading: false,
+        section: {
+          content: '正在加载...'
+        }
       }
     },
     created: function () {
       const code = window.location.hash.substring(10);
-      axios.get(process.env.API_ROOT + "section/" + code).then(res => {
-        if (res.status === 200) {
-          if (!res.data.section) {
-            res.data.section = {"title": "章节不存在", content:"<p style='text-align: center'>请联系管理员！</p>"};
-          }
 
-          this.section = res.data.section;
-          document.title = this.section.title;
+      if (!this.start()) {
+        return;
+      }
+
+      let that = this
+      this.httpGet("section/" + code, function (data) {
+        if (!data.section) {
+          data.section = {"title": "章节不存在", content:"<p style='text-align: center'>请联系管理员！</p>"};
         }
-      }).catch(error => console.log(error));
+
+        that.section = data.section;
+        document.title = that.section.title;
+        that.loading = false;
+      }, function (respCo) {
+        that.section = {
+          content: '加载失败，错误代码：' + respCo
+        }
+        that.loading = false;
+      })
     },
     methods: {
+      start: function () {
+        if (this.loading) {
+          this.$toast.top('请不要频繁操作');
+          return false
+        }
+        this.loading = true;
+
+        this.section.content = '正在加载...'
+        return true;
+      },
       prev: function () {
-        axios.get(process.env.API_ROOT + "/section/" + this.section.code + "/prev").then(res => {
-          if (res.status === 200) {
-            if (!res.data.section) {
-              window.location.href = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + window.location.pathname + "#/" + "novel/" + this.section.novelCode;
-              return;
-            }
-            this.section = res.data.section;
-            document.title = this.section.title;
-            scrollTo(0, 0);
+
+        if (!this.start()) {
+          return;
+        }
+
+        let that = this
+        this.httpGet("/section/" + this.section.code + "/prev", function (data) {
+          if (!data.section) {
+            window.location.href = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + window.location.pathname + "#/" + "novel/" + that.section.novelCode;
+            return;
           }
-        }).catch(error => console.log(error));
+          that.section = data.section;
+          document.title = that.section.title;
+          scrollTo(0, 0);
+          that.loading = false;
+        }, function (respCo) {
+          that.section = {
+            content: '加载失败，错误代码：' + respCo
+          }
+          that.loading = false;
+        })
       },
       next: function () {
-        axios.get(process.env.API_ROOT + "/section/" + this.section.code + "/next").then(res => {
-          if (res.status === 200) {
-            if (!res.data.section) {
-              window.location.href = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + window.location.pathname + "#/" + "novel/" + this.section.novelCode;
-              return;
-            }
-            this.section = res.data.section;
-            document.title = this.section.title;
-            scrollTo(0, 0);
+
+        if (!this.start()) {
+          return;
+        }
+
+        let that = this
+        this.httpGet("/section/" + this.section.code + "/next", function (data) {
+          if (!data.section) {
+            window.location.href = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + window.location.pathname + "#/" + "novel/" + that.section.novelCode;
+            return;
           }
-        }).catch(error => console.log(error));
+          that.section = data.section;
+          document.title = that.section.title;
+          scrollTo(0, 0);
+          that.loading = false;
+        }, function (respCo) {
+          that.section = {
+            content: '加载失败，错误代码：' + respCo
+          }
+          that.loading = false;
+        })
       }
     }
   }

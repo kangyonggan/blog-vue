@@ -28,11 +28,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import List from '../../components/List'
-
   export default {
-    components: {List},
     name: 'Novel',
     data() {
       return {
@@ -44,15 +40,10 @@
         if (e.keyCode === 13) {
           e.preventDefault();
           var key = e.target.value;
-          axios.get(process.env.API_ROOT + "novel?key=" + key).then(res => {
-            if (res.status === 200) {
-              if (res.data.respCo === '0000') {
-                this.$refs.novelList.reload(res);
-              } else {
-                console.error(res.data.respMsg);
-              }
-            }
-          }).catch(error => console.log(error));
+          let that = this
+          this.httpGet("novel?key=" + key, function (data) {
+            that.$refs.novelList.reload(data);
+          });
           if (!key) {
             key = "小说列表";
           }
@@ -64,15 +55,11 @@
         this.actives = new Array(size);
         this.actives[index] = true;
         this.$refs.novelList.updateTitle(category.name);
-        axios.get(process.env.API_ROOT + "novel?categoryCode=" + category.code).then(res => {
-          if (res.status === 200) {
-            if (res.data.respCo === '0000') {
-              this.$refs.novelList.reload(res);
-            } else {
-              console.error(res.data.respMsg);
-            }
-          }
-        }).catch(error => console.log(error));
+
+        let that = this
+        this.httpGet("novel?categoryCode=" + category.code, function (data) {
+          that.$refs.novelList.reload(data);
+        })
       }
     }
   }

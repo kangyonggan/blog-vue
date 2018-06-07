@@ -26,7 +26,6 @@
       return {
         categories: [
           {name: '关于', isActive: hash === "about", code: "about"},
-          {name: '留言', isActive: hash === "guest", code: "guest"},
           {name: '小说', isActive: hash === "novel", code: "novel"},
           {name: '工具', isActive: hash === "tool", code: "tool"}
         ]

@@ -13,10 +13,10 @@
 
       <ul class="list">
         <slot v-bind:list="list" v-if="list && list.length > 0"></slot>
-        <li v-else class="empty">没有符合条件的记录</li>
+        <li v-else class="empty">{{result}}</li>
       </ul>
 
-      <ul class="pagination" v-show="pagination && pageInfo.pages > 1">
+      <ul class="pagination" v-if="pagination && pageInfo.pages > 1">
         <li class="show" v-show="pageInfo.hasPreviousPage"><a v-on:click="jump(pageInfo.prePage)">&lt;</a></li>
         <li v-for="nav in pageInfo.navigatepageNums"
             :class="{active: nav==pageInfo.pageNum, show: nav < pageInfo.pageNum + 2 && nav > pageInfo.pageNum - 2}">
@@ -29,14 +29,13 @@
 </template>
 
 <script>
-  import axios from 'axios'
-
   export default {
     name: 'List',
     props: ["icon", "pagination", "pageSize", "title", "url", "more"],
     data() {
       return {
         list: [],
+        result: '正在加载...',
         pageInfo: {},
         serverUrl: "",
         listTitle: ""
@@ -57,29 +56,26 @@
           if (this.pageSize) {
             params += "&pageSize=" + this.pageSize;
           }
-          url = process.env.API_ROOT + url + params;
-        } else {
-          url = process.env.API_ROOT + url;
+          url = url + params;
         }
-        axios.get(url).then(res => {
-          if (res.status === 200) {
-            if (res.data.respCo === '0000') {
-              this.reload(res);
-            } else {
-              console.error(res.data.respMsg);
-            }
-          }
-        }).catch(error => console.log(error));
+
+        this.result = '正在加载...';
+        let that = this
+        this.httpGet(url, function (data) {
+          that.reload(data);
+        }, function (respCo) {
+          that.result = '加载失败，错误代码：' + respCo
+        })
       },
       jump: function (pageNum) {
         this.load(this.serverUrl, pageNum);
       },
-      reload: function (res) {
+      reload: function (data) {
         if (this.pagination) {
-          this.pageInfo = res.data.pageInfo;
+          this.pageInfo = data.pageInfo;
           this.list = this.pageInfo.list;
         } else {
-          this.list = res.data.list;
+          this.list = data.list;
         }
 
         scroll(0, 0);
