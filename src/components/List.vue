@@ -78,6 +78,10 @@
           this.list = data.list;
         }
 
+        if (!this.list || !this.list.length) {
+          this.result = '没有内容';
+        }
+
         scroll(0, 0);
       },
       updateTitle: function (title) {
