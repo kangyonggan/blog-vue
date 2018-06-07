@@ -7,12 +7,16 @@
           <span class="hidden">康永敢</span>
         </a>
       </li>
+
       <li v-for="category in categories"
           :class="{'active': category.isActive}">
         <a :href="'/#/' + category.code"
            v-on:click="active(category.code)">
           {{category.name}}
         </a>
+      </li>
+      <li>
+        <a href="https://kangyonggan.com/admin">后管</a>
       </li>
     </ul>
   </div>
