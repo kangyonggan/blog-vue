@@ -31,7 +31,7 @@
 <script>
   export default {
     name: 'List',
-    props: ["icon", "pagination", "pageSize", "title", "url", "more"],
+    props: ["icon", "pagination", "pageSize", "title", "url", "more", "sort", "order"],
     data() {
       return {
         list: [],
@@ -50,14 +50,20 @@
     },
     methods: {
       load: function (url, pageNum) {
+
+        let params = "?"
+        if (this.sort && this.order) {
+          params += "_sort=" + this.sort + "&_order=" + this.order
+        }
+
         this.serverUrl = url;
         if (this.pagination) {
-          var params = "?pageNum=" + pageNum;
+          params += "&pageNum=" + pageNum;
           if (this.pageSize) {
             params += "&pageSize=" + this.pageSize;
           }
-          url = url + params;
         }
+        url += params;
 
         this.result = '正在加载...';
         let that = this

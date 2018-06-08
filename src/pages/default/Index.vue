@@ -4,7 +4,7 @@
       <input name="key" placeholder="搜索文章标题..." @keydown="search($event)"/>
     </form>
 
-    <List icon="fa fa-list" :pagination="true" pageSize="7" title="文章列表" url="article" ref="articleList">
+    <List icon="fa fa-list" :pagination="true" pageSize="7" title="文章列表" url="article" ref="articleList" sort="id" order="desc">
       <template slot-scope="app">
         <li v-for="article in app.list">
           <div class="line"></div>
