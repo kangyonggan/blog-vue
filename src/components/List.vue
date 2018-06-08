@@ -50,10 +50,9 @@
     },
     methods: {
       load: function (url, pageNum) {
-
-        let params = "?"
+        let params = url.indexOf('?') > -1 ? "" : "?"
         if (this.sort && this.order) {
-          params += "_sort=" + this.sort + "&_order=" + this.order
+          params += "&_sort=" + this.sort + "&_order=" + this.order
         }
 
         this.serverUrl = url;
