@@ -2,7 +2,7 @@
   <div>
     <a v-on:click="sort()" class="update">
       <i class="fa fa-sort"></i>
-      倒叙
+      {{sortText}}
     </a>
     <a v-on:click="pull()" class="update">
       <i class="fa fa-sync"></i>
@@ -24,8 +24,9 @@
     name: 'NovelSections',
     data() {
       return {
+        sortText: '倒叙',
         loading: false,
-        order: "desc"
+        order: "asc"
       }
     },
     created: function () {
@@ -67,12 +68,14 @@
         const code = window.location.hash.substring(8);
         if (this.order === 'asc') {
           this.order = "desc";
+          this.sortText = "正序"
         } else {
           this.order = 'asc';
+          this.sortText = "倒叙"
         }
 
         let that = this
-        this.httpGet("section/?_sort=code&_order="+ this.order +"&novelCode=" + code, function (data) {
+        this.httpGet("section?_sort=code&_order="+ this.order +"&novelCode=" + code, function (data) {
           that.$toast.top(data.respMsg);
           that.$refs.novelSections.reload(data);
           that.loading = false
