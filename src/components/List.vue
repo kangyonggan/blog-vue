@@ -49,7 +49,11 @@
       }
     },
     methods: {
-      load: function (url, pageNum) {
+      setSort: function (sort, order) {
+        this.sort = sort
+        this.order = order
+      },
+      load: function (url, pageNum, success, failure) {
         let params = url.indexOf('?') > -1 ? "" : "?"
         if (this.sort && this.order) {
           params += "&_sort=" + this.sort + "&_order=" + this.order
@@ -68,8 +72,14 @@
         let that = this
         this.httpGet(url, function (data) {
           that.reload(data);
+          if (success) {
+            success(data)
+          }
         }, function (respCo) {
           that.result = '加载失败，错误代码：' + respCo
+          if (failure) {
+            failure()
+          }
         })
       },
       jump: function (pageNum) {

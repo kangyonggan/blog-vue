@@ -63,7 +63,6 @@
           this.$toast.top('请不要频繁操作');
           return
         }
-        this.$refs.novelSections.reload({});
         this.loading = true
         const code = window.location.hash.substring(8);
         if (this.order === 'asc') {
@@ -73,11 +72,9 @@
           this.order = 'asc';
           this.sortText = "倒叙"
         }
-
+        this.$refs.novelSections.setSort('code', this.order)
         let that = this
-        this.httpGet("section?_sort=code&_order="+ this.order +"&novelCode=" + code, function (data) {
-          that.$toast.top(data.respMsg);
-          that.$refs.novelSections.reload(data);
+        this.$refs.novelSections.load("section?novelCode=" + code, 1, function () {
           that.loading = false
         }, function () {
           that.loading = false
