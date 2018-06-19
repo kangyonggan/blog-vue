@@ -16,6 +16,16 @@ html, body {
   overflow: hidden;
 }
 
+.black {
+  background: #333 !important;
+  border-color: #787878 !important;
+  color: #787878;
+}
+
+.grey {
+  border-color: #787878 !important;
+}
+
 .container {
   max-width: 1056px;
   padding-left: 16px;

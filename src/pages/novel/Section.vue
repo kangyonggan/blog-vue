@@ -1,5 +1,6 @@
 <template>
   <div class="border">
+    <a href="javascript:" @click="changeTheme" class="theme">{{themeName}}</a>
     <h1>{{section.title}}</h1>
     <div class="split"></div>
     <div class="tool" v-show="section.title != '章节不存在'">
@@ -19,11 +20,13 @@
 </template>
 
 <script>
+  import $ from 'jquery'
   export default {
     name: 'Section',
     data() {
       return {
         loading: false,
+        themeName: '关灯',
         section: {
           content: '正在加载...'
         }
@@ -108,6 +111,23 @@
           }
           that.loading = false;
         })
+      },
+      changeTheme: function () {
+        if (this.themeName === '关灯') {
+          this.themeName = '开灯';
+          $(".content").addClass("black");
+          $(".container").addClass("black");
+          $(".main").addClass("black");
+          $(".border").addClass("black");
+          $(".split").addClass("grey");
+        } else {
+          this.themeName = '关灯';
+          $(".content").removeClass("black");
+          $(".container").removeClass("black");
+          $(".main").removeClass("black");
+          $(".border").removeClass("black");
+          $(".split").removeClass("grey");
+        }
       }
     }
   }
@@ -121,6 +141,7 @@
 
   .content {
     padding: 15px;
+    font-size: 19px;
   }
 
   .tool {
@@ -129,7 +150,7 @@
     padding: 0 10px;
   }
 
-  a {
+  .tool a {
     height: 40px;
     line-height: 40px;
     cursor: pointer;
@@ -147,5 +168,11 @@
     position: absolute;
     left: 50%;
     top: 0;
+  }
+
+  .theme {
+    position: absolute;
+    right: 30px;
+    top: 90px;
   }
 </style>
