@@ -91,6 +91,7 @@
     max-width: 45%;
     height: 20px;
     overflow: hidden;
+    cursor: pointer;
   }
   .r {
     float: right;
