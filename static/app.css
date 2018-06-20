@@ -241,3 +241,11 @@ a.btn-danger:hover {
 .text-center {
   text-align: center;
 }
+
+.markdown .prettyprint {
+  padding: 0 !important;
+}
+
+.markdown ol.linenums {
+  margin: 0 !important;
+}
