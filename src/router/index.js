@@ -41,7 +41,7 @@ const router = new Router({
       component: Novel
     },
     {
-      path: '/article/*',
+      path: '/article/:id',
       name: 'ArticleDetail',
       component: ArticleDetail
     },
