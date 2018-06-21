@@ -7,8 +7,10 @@ import './components/toast/toast.css';
 import './common'
 import Toast from './components/toast/toast';
 import List from './components/List.vue'
+import Pay from './components/Pay.vue'
 
 Vue.component('List', List)
+Vue.component('Pay', Pay)
 
 Vue.config.productionTip = false
 

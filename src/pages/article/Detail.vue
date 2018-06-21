@@ -1,14 +1,18 @@
 <template>
-  <div class="border">
-    <h1>{{article.title}}</h1>
-    <div class="split"></div>
-    <div class="markdown" v-html="article.content">
+  <div>
+    <div class="border">
+      <h1>{{article.title}}</h1>
+      <div class="split"></div>
+      <div class="markdown" v-html="article.content">
+      </div>
+      <div class="split"></div>
+      <div class="toolbar">
+        <a @click="prev" v-if="prevArticle">&lt; {{prevArticle.title}}</a>
+        <a @click="next" v-if="nextArticle" class="r">{{nextArticle.title}} &gt;</a>
+      </div>
     </div>
-    <div class="split"></div>
-    <div class="toolbar">
-      <a @click="prev" v-if="prevArticle">&lt; {{prevArticle.title}}</a>
-      <a @click="next" v-if="nextArticle" class="r">{{nextArticle.title}} &gt;</a>
-    </div>
+
+    <Pay v-if="article.id"/>
   </div>
 </template>
 
