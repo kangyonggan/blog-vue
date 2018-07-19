@@ -6,9 +6,11 @@ import Index from '@/pages/default/Index'
 import About from '@/pages/default/About'
 import Novel from '@/pages/default/Novel'
 import Tool from '@/pages/default/Tool'
+import Phrasal from '@/pages/default/Phrasal'
 
 import ArticleDetail from '@/pages/article/Detail'
 import ToolDetail from '@/pages/tool/Detail'
+import PhrasalDetail from '@/pages/phrasal/Detail'
 import NovelSections from '@/pages/novel/Sections'
 import Section from '@/pages/novel/Section'
 
@@ -35,6 +37,12 @@ const router = new Router({
       component: Tool
     },
     {
+      path: '/phrasal',
+      name: 'Phrasal',
+      meta: {title: '成语'},
+      component: Phrasal
+    },
+    {
       path: '/novel',
       name: 'Novel',
       meta: {title: '小说'},
@@ -59,6 +67,11 @@ const router = new Router({
       path: '/section/*',
       name: 'Section',
       component: Section
+    },
+    {
+      path: '/phrasal/:id',
+      name: 'PhrasalDetail',
+      component: PhrasalDetail
     },
     {
       path: '*',

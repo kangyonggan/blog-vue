@@ -31,6 +31,7 @@
         categories: [
           {name: '关于', isActive: hash === "about", code: "about"},
           {name: '小说', isActive: hash === "novel", code: "novel"},
+          {name: '成语', isActive: hash === "phrasal", code: "phrasal"},
           {name: '工具', isActive: hash === "tool", code: "tool"}
         ]
       };
