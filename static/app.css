@@ -97,6 +97,7 @@ a:hover {
 }
 
 .pagination {
+  clear: both;
   list-style: none;
   height: 32px;
   padding-left: 15px;

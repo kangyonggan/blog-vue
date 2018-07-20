@@ -24,6 +24,8 @@
         </li>
         <li class="show" v-show="pageInfo.hasNextPage"><a v-on:click="jump(pageInfo.nextPage)">&gt;</a></li>
       </ul>
+
+      <div style="clear:both;height: 1px"></div>
     </div>
   </div>
 </template>
@@ -31,7 +33,7 @@
 <script>
   export default {
     name: 'List',
-    props: ["icon", "pagination", "pageSize", "title", "url", "more", "sort", "order"],
+    props: ["icon", "pagination", "pageSize", "title", "url", "more", "sort", "order", "init"],
     data() {
       return {
         list: [],
@@ -45,7 +47,13 @@
       this.listTitle = this.title;
       if (this.url) {
         this.serverUrl = this.url;
-        this.jump(1);
+        if (this.init) {
+          this.jump(1);
+        } else {
+          this.result = '请先查询'
+        }
+      } else {
+        this.result = '请先查询'
       }
     },
     methods: {
