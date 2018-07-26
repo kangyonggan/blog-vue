@@ -56,6 +56,11 @@
         this.phrasalList = phrasalList
         document.title = this.phrasal.name;
       }
+    },
+    watch: {
+      '$route' (newRoute) {
+        this.query()
+      }
     }
   }
 </script>
