@@ -33,7 +33,7 @@
 <script>
   export default {
     name: 'List',
-    props: ["icon", "pagination", "pageSize", "title", "url", "more", "sort", "order", "init"],
+    props: ["icon", "pagination", "pageSize", "title", "url", "more", "sort", "order", "lazy"],
     data() {
       return {
         list: [],
@@ -47,7 +47,7 @@
       this.listTitle = this.title;
       if (this.url) {
         this.serverUrl = this.url;
-        if (this.init) {
+        if (!this.lazy) {
           this.jump(1);
         } else {
           this.result = '请先查询'

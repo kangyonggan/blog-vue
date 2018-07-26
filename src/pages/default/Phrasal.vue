@@ -35,7 +35,7 @@
       <div class="empty-20 clear"></div>
     </form>
 
-    <List icon="fa fa-file-alt" url="phrasal" title="查询结果" :pagination="true" pageSize="50" ref="phrasalList" :init=false>
+    <List icon="fa fa-file-alt" url="phrasal" title="查询结果" :pagination="true" pageSize="50" ref="phrasalList" :lazy=false>
       <template slot-scope="app">
         <li v-for="phrasal in app.list" class="compact">
           <a :href="'/#/phrasal/' + phrasal.id">{{phrasal.name}}</a>
