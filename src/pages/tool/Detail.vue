@@ -132,7 +132,7 @@
 
       <div class="result">
         <div v-if="tool.code == 'qr'">
-          <img :src="result == '' ? '/static/logo.png' : API_ROOT + result"/>
+          <img :src="result == '' ? '/static/logo.png' : UPLOAD_ROOT + result"/>
         </div>
         <div v-else-if="tool.code == 'xml' || tool.code == 'json' || tool.code == 'sql' || tool.code == 'js' || tool.code == 'css'">
           <pre><code>{{result}}</code></pre>
@@ -155,7 +155,7 @@
     name: 'ToolDetail',
     data() {
       return {
-        API_ROOT: process.env.API_ROOT,
+        UPLOAD_ROOT: process.env.UPLOAD_ROOT,
         result: '',
         tool: {},
         serverData: {}
